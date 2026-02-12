@@ -6,7 +6,7 @@ interface props {
   max?: number;
   min?: number;
   placeholder?: string;
-  type?: "password" | "text";
+  type?: "password" | "text" | "email";
   setState: Dispatch<SetStateAction<string>>;
 }
 

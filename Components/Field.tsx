@@ -9,7 +9,7 @@ interface props {
   min: number;
   max: number;
   required?: boolean;
-  typeInput?: "text" | "password";
+  typeInput?: "text" | "password" | "email";
   text: string;
 }
 

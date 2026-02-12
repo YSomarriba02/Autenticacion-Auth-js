@@ -5,7 +5,6 @@ type props = {
 };
 
 export default function Label({ text, htmlFor, state }: props) {
-  console.log(state);
   return (
     <label
       htmlFor={htmlFor}

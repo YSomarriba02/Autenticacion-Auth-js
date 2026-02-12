@@ -7,7 +7,7 @@ const itemsLi: { href: string; text: string }[] = [
 
 export default function NavBar() {
   return (
-    <nav className="w-full px-8 py-4 bg-slate-600">
+    <nav className="w-full px-8 py-4 bg-slate-600 mb-">
       <ul className="flex w-full justify-between">
         {itemsLi.map(({ href, text }, i) => {
           return (
