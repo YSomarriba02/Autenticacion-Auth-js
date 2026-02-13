@@ -1,7 +1,9 @@
 "use server"
 
+import { redirect } from "next/navigation"
 import { loginUser } from "../services/authService"
 import { user } from "../types/user"
+import { cookies } from "next/headers"
 
 export async function iniciarSesion(prevState: string, formData: FormData) {
     const email = formData.get("email") as string
@@ -10,5 +12,7 @@ export async function iniciarSesion(prevState: string, formData: FormData) {
     const resp = await loginUser(email, password)
     if (!resp) return "usuario no encontrado"
     const respUser = resp as user
-    return `${respUser.email} autenticado`
+    const cookieStore = await cookies();
+    cookieStore.set("userCookie", JSON.stringify(respUser), { maxAge: 10 })
+    redirect("/profile")
 }

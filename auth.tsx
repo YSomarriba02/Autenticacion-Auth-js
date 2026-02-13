@@ -1,14 +1,41 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import querySQL2 from "./app/lib/bd";
+import Credentials from "next-auth/providers/credentials";
+import Email from "next-auth/providers/email";
+import { loginUser } from "./app/lib/services/authService";
+import { user } from "./app/lib/types/user";
 
-export const { handlers } = NextAuth({
+export const { handlers, auth } = NextAuth({
   providers: [
     Google({
       clientId: process.env.GOOGLE_ID,
       clientSecret: process.env.GOOGLE_SECRET,
     }),
+    Credentials({
+      name: "autenticacion propia",
+      credentials: {
+        email: { label: "ingressa email", type: "email" },
+        password: { label: "ingresa la passwordd", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = credentials.email as string;
+        const password = credentials.password as string;
+
+        console.log("nnose");
+        if (!email || !password) return null;
+
+        const resp = await loginUser(email, password);
+        if (!resp) return null;
+        const user = resp as user;
+        console.log("authorice es bien");
+        return {
+          email: user.email,
+        };
+      },
+    }),
   ],
+
   secret: process.env.SECRET,
 
   callbacks: {

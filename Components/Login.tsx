@@ -1,20 +1,40 @@
 "use client";
 
-import { useActionState } from "react";
-import { iniciarSesion } from "@/app/lib/Actions/userActions";
+import { useActionState, useState } from "react";
 import ButtonAuth from "./ButtonAuth";
 import Field from "./Field";
 import Link from "next/link";
-
-function handler() {}
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const [result, formAction, isPending] = useActionState(iniciarSesion, "");
+  const [isPending, setPending] = useState(false);
+  const router = useRouter();
   return (
     <div className="p-4 flex flex-col gap-6 absolute left-0 right-0 m-auto w-5/6 bg-zinc-700 rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
       <p className="text-4xl">Login</p>
-      {result}
-      <form action={formAction} className="mt-4 flex flex-col gap-4 md:gap-6">
+      <form
+        onSubmit={async (e: React.FormEvent) => {
+          e.preventDefault();
+          setPending(true);
+          const form = e.target as HTMLFormElement;
+          const formData = new FormData(form);
+          const resp = await signIn("credentials", {
+            email: formData.get("email"),
+            password: formData.get("password"),
+            redirect: false,
+            redirectTo: "/profile",
+          });
+
+          setPending(false);
+          if (!resp.ok) {
+            alert("Credenciales no validas");
+            return;
+          }
+          router.push(resp?.url || "/");
+        }}
+        className="mt-4 flex flex-col gap-4 md:gap-6"
+      >
         <Field
           max={30}
           min={4}
