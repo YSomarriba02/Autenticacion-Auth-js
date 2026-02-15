@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import querySQL2 from "./app/lib/bd";
 import Credentials from "next-auth/providers/credentials";
-import Email from "next-auth/providers/email";
 import { loginUser } from "./app/lib/services/authService";
 import { user } from "./app/lib/types/user";
 
@@ -22,15 +21,15 @@ export const { handlers, auth } = NextAuth({
         const email = credentials.email as string;
         const password = credentials.password as string;
 
-        console.log("nnose");
         if (!email || !password) return null;
 
         const resp = await loginUser(email, password);
         if (!resp) return null;
         const user = resp as user;
-        console.log("authorice es bien");
         return {
+          id: String(user.id),
           email: user.email,
+          image: "https://avatars.githubusercontent.com/u/128437648?v=4", //imagen default por mientras
         };
       },
     }),
@@ -46,8 +45,6 @@ export const { handlers, auth } = NextAuth({
           "select email from usuarios where email = @email",
           [{ name: "email", type: "string", value: email }],
         );
-        if (!usuarioBd) {
-        }
         if (usuarioBd?.length == 0) {
           const newUsuario = await querySQL2(
             "insert into usuarios values(@email,@passw)",
@@ -56,17 +53,16 @@ export const { handlers, auth } = NextAuth({
               { name: "passw", type: "string", value: `passw_${email}` },
             ],
           );
-          console.log("usuario creado");
-          console.log(newUsuario);
-        } else {
-          console.log("usuario ya existe");
-          console.log(usuarioBd);
         }
+        token.email = user.email;
+        token.picture = user.image;
       }
+
       return token;
     },
     async session({ session, token }) {
       session.user.email = token.email!;
+      session.user.image = token.picture;
       return session;
     },
   },

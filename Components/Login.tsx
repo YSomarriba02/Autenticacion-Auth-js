@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useState } from "react";
 import ButtonAuth from "./ButtonAuth";
 import Field from "./Field";
 import Link from "next/link";
@@ -59,7 +59,6 @@ export default function Login() {
           Inciar sesion
         </button>
       </form>
-
       <div className="flex h-full mt-8">
         <ButtonAuth provider="google" redirect="/profile" typeAuth="login" />
       </div>

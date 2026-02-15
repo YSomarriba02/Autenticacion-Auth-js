@@ -16,3 +16,7 @@ export async function iniciarSesion(prevState: string, formData: FormData) {
     cookieStore.set("userCookie", JSON.stringify(respUser), { maxAge: 10 })
     redirect("/profile")
 }
+
+export async function registrarSesion(prevState: string, formData: FormData) {
+
+}
