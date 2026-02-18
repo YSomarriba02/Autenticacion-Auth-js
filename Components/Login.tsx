@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [isPending, setPending] = useState(false);
+  const [error, setError] = useState<null | string>(null);
   const router = useRouter();
   return (
     <div className="p-4 flex flex-col gap-6 absolute left-0 right-0 m-auto w-5/6 bg-zinc-700 rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
       <p className="text-4xl">Login</p>
+      {error && <span className="text-red-500">{error}</span>}
       <form
         onSubmit={async (e: React.FormEvent) => {
           e.preventDefault();
@@ -27,8 +29,8 @@ export default function Login() {
           });
 
           setPending(false);
-          if (!resp.ok) {
-            alert("Credenciales no validas");
+          if (resp.error) {
+            setError("Credenciales invalidas");
             return;
           }
           router.push(resp?.url || "/");
@@ -54,7 +56,7 @@ export default function Login() {
         <button
           disabled={isPending}
           type="submit"
-          className="bg-blue-400 h-10 md:h-14 rounded-2xl text-lg font-semibold hover:bg-blue-500 hover:scale-95 transition-[background-color,scale] ease-in duration-100"
+          className="bg-blue-400 h-10 md:h-14 rounded-2xl text-lg font-semibold hover:bg-blue-500 hover:scale-95 transition-[background-color,scale] ease-in duration-100 disabled:scale-95"
         >
           Inciar sesion
         </button>

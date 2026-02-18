@@ -30,7 +30,7 @@ const typesSql = {
 
 type sqlTypes = keyof typeof typesSql
 
-interface param {
+export interface param {
     value: any,
     type: sqlTypes,
     name: string
@@ -43,6 +43,7 @@ export default async function querySQL2<T = any>(query: string, parametros: para
         const typeInput = typesSql[type]
         request.input(name, typeInput, value)
     }
-    return (await request.query(query)).recordset as T[];
+    const resp = await request.query(query)
+    return resp.recordset as T[]
 }
 

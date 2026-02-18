@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import querySQL2 from "./app/lib/bd";
 import Credentials from "next-auth/providers/credentials";
-import { loginUser } from "./app/lib/services/authService";
-import { user } from "./app/lib/types/user";
+import { loginUser } from "./app/lib/services/auth/loginUser";
+import { findUserBd } from "./app/lib/repositories/findUserBd";
+import signUpWithProvider from "./app/lib/services/auth/signUpWithProvider";
 
-export const { handlers, auth } = NextAuth({
+export const { handlers, auth, signIn } = NextAuth({
   providers: [
     Google({
       clientId: process.env.GOOGLE_ID,
@@ -23,9 +23,8 @@ export const { handlers, auth } = NextAuth({
 
         if (!email || !password) return null;
 
-        const resp = await loginUser(email, password);
-        if (!resp) return null;
-        const user = resp as user;
+        const user = await loginUser(email, password);
+        if (!user) return null;
         return {
           id: String(user.id),
           email: user.email,
@@ -38,21 +37,13 @@ export const { handlers, auth } = NextAuth({
   secret: process.env.SECRET,
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       if (user) {
-        const email = user.email;
-        const usuarioBd = await querySQL2(
-          "select email from usuarios where email = @email",
-          [{ name: "email", type: "string", value: email }],
-        );
-        if (usuarioBd?.length == 0) {
-          const newUsuario = await querySQL2(
-            "insert into usuarios values(@email,@passw)",
-            [
-              { name: "email", type: "string", value: email },
-              { name: "passw", type: "string", value: `passw_${email}` },
-            ],
-          );
+        const email = user.email as string;
+        const usuarioBd = await findUserBd(email);
+        if (!usuarioBd) {
+          const provider = account?.provider as string;
+          signUpWithProvider(email, provider);
         }
         token.email = user.email;
         token.picture = user.image;
