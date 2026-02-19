@@ -24,7 +24,7 @@ html {
 }
 
 body {
-  background: var(--background);
+  /* background: var(--background) */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -38,4 +38,34 @@ body {
   .border-clase:focus {
     border: 2px solid rgb(75, 136, 228);
   }
+}
+
+
+@theme {
+  --animate-entradaModal: animacion-entrada-modal 1s ease forwards;
+  --animate-salidaModal: animacion-salida-modal 1s ease forwards;
+
+  @keyframes animacion-entrada-modal {
+    from {
+      transform: translateY(-100%) scale(0)
+    }
+
+    to {
+      transform: translateY(100%) scale(1)
+    }
+  }
+
+  @keyframes animacion-salida-modal {
+    from {
+      transform: translateY(100%) scale(1)
+    }
+
+    to {
+      transform: translateY(-100%) scale(0)
+    }
+  }
+}
+
+.s {
+  transform: scale();
 }

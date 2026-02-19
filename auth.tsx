@@ -5,7 +5,7 @@ import { loginUser } from "./app/lib/services/auth/loginUser";
 import { findUserBd } from "./app/lib/repositories/findUserBd";
 import signUpWithProvider from "./app/lib/services/auth/signUpWithProvider";
 
-export const { handlers, auth, signIn } = NextAuth({
+export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [
     Google({
       clientId: process.env.GOOGLE_ID,
@@ -29,6 +29,7 @@ export const { handlers, auth, signIn } = NextAuth({
           id: String(user.id),
           email: user.email,
           image: "https://avatars.githubusercontent.com/u/128437648?v=4", //imagen default por mientras
+          name: user.email.split("@")[0],
         };
       },
     }),
@@ -37,8 +38,9 @@ export const { handlers, auth, signIn } = NextAuth({
   secret: process.env.SECRET,
 
   callbacks: {
-    async jwt({ token, user, account }) {
+    async jwt({ token, user, account, profile }) {
       if (user) {
+        console.log(account);
         const email = user.email as string;
         const usuarioBd = await findUserBd(email);
         if (!usuarioBd) {
@@ -47,6 +49,11 @@ export const { handlers, auth, signIn } = NextAuth({
         }
         token.email = user.email;
         token.picture = user.image;
+
+        const nombre = user.name?.split(" ")[0];
+        const appellido = user.name?.split(" ")[2] || "";
+
+        token.name = `${nombre} ${appellido}`;
       }
 
       return token;
@@ -54,6 +61,7 @@ export const { handlers, auth, signIn } = NextAuth({
     async session({ session, token }) {
       session.user.email = token.email!;
       session.user.image = token.picture;
+      session.user.name = token.name;
       return session;
     },
   },
