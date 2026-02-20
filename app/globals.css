@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@layer base {
+  :root {
+    interpolate-size: allow-keywords;
+
+    --background: rgb(218, 218, 218);
+    --text: #000000;
+    --color-base: #ffff;
+  }
 }
+
 
 html {
   border-radius: 0px;
@@ -18,21 +24,22 @@ html {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #3d3c3c;
+    --text: #ededed;
+    --color-base: #575757;
+
   }
 }
 
 body {
   /* background: var(--background) */
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer components {
   .border-clase {
     border-radius: 0px;
-    border: 1px solid white;
+    border: 1px solid var(--text);
   }
 
   .border-clase:focus {
@@ -44,6 +51,9 @@ body {
 @theme {
   --animate-entradaModal: animacion-entrada-modal 1s ease forwards;
   --animate-salidaModal: animacion-salida-modal 1s ease forwards;
+  --color-base: var(--color-base);
+
+
 
   @keyframes animacion-entrada-modal {
     from {

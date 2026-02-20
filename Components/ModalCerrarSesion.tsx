@@ -53,7 +53,7 @@ export default function ModalCerrarSesion({ cerrarModal: close }: props) {
     >
       <div
         onClick={stopProgragation}
-        className="flex flex-col gap-4 items-center py-4 px-8 absolute left-1/2 top-1/2 -translate-1/2 w-3/4 bg-white rounded-2xl sm:w-3/5 md:w-2/6"
+        className="flex flex-col gap-4 items-center py-4 px-8 absolute left-1/2 top-1/2 -translate-1/2 w-3/4 bg-base rounded-2xl sm:w-3/5 md:w-2/6"
       >
         <img
           src="/icons/advertencia-icon.png"
@@ -67,13 +67,13 @@ export default function ModalCerrarSesion({ cerrarModal: close }: props) {
         <nav className="flex gap-2 w-full">
           <button
             onClick={cerrarSesion}
-            className="p-2 bg-red-400 text-slate-50 w-1/2 font-semibold"
+            className="p-2 bg-red-400 text-slate-50 w-1/2 font-semibold hover:bg-red-600 transition-colors ease-out duration-150"
           >
             Cerrar sesion
           </button>
           <button
             onClick={cerrarModal}
-            className="p-2 border-2 border-black rounded-md text-black w-1/2 font-semibold"
+            className="p-2 border-2 border-(--text) bg-base hover:contrast-150 rounded-md text-(--text) w-1/2 font-semibold transition-[filter] ease-out duration-150"
           >
             Cancelar
           </button>

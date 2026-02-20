@@ -17,7 +17,7 @@ export default async function NavBar() {
 
   const itemsLi: navLink[] = [{ href: "/", text: "home" }, linkDinamico];
   return (
-    <nav className="w-full px-8 py-2 bg-slate-600 fixed top-0 z-10 h-16 flex items-center rounded-b-lg">
+    <nav className="w-full px-8 py-2 bg-base fixed top-0 z-10 h-16 flex items-center rounded-b-lg">
       <ul className="flex w-full justify-between items-center">
         {itemsLi.map(({ href, text, icon }, i) => {
           return (

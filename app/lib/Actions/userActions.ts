@@ -134,3 +134,21 @@ export async function registrarSesion(prevState: retorno, formData: FormData) {
 // }
 
 // registrar sesion --------------------------
+
+export type CambiarContraseñaResult = CambiarContraseñaState | null
+
+interface CambiarContraseñaState {
+    state: boolean,
+    message: string,
+}
+
+export async function ActionCambiarContraseña(prevState: CambiarContraseñaResult, formData: FormData): Promise<CambiarContraseñaResult> {
+    const password1 = formData.get("password1") as string
+    const password2 = formData.get("password2") as string
+    if (!compararPassword(password1, password2)) {
+        return {
+            message: "contraseñas no coinciden", state: false
+        }
+    }
+    return null
+}

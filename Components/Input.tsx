@@ -27,7 +27,7 @@ export default function Input({
       maxLength={max}
       minLength={min}
       placeholder={placeholder}
-      className="peer outline-0 p-2 py-2.5 border-clase rounded-md sm:p-3 sm:py-4"
+      className="peer outline-0 p-2 py-2.5 border-clase rounded-md sm:p-3 sm:py-2.5"
       onChange={(e: ChangeEvent) => {
         const input = e.target as HTMLInputElement;
         setState(input.value);

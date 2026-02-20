@@ -21,7 +21,7 @@ export default function Login() {
 
   return (
     <div className="h-screen">
-      <div className="p-4 flex flex-col gap-6 absolute left-0 right-0 m-auto w-5/6 bg-zinc-700 rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
+      <div className="p-4 flex flex-col absolute left-0 bg-base right-0 m-auto w-5/6 [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6 ">
         <p className="text-4xl">Login</p>
         {error && <span className="text-red-500">{error}</span>}
         <form
@@ -62,6 +62,15 @@ export default function Login() {
             text="contraseña"
             typeInput={"password"}
           />
+          <div className="relative ">
+            <hr />
+            <Link
+              className="px-2 bg-base text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
+              href={"/auth/signup"}
+            >
+              registrarse
+            </Link>
+          </div>
           <button
             disabled={isPending}
             type="submit"
@@ -70,17 +79,9 @@ export default function Login() {
             Inciar sesion
           </button>
         </form>
-        <div className="flex h-full mt-8">
+
+        <div className="flex h-full mt-2">
           <ButtonAuth provider="google" redirect="/profile" typeAuth="login" />
-        </div>
-        <div className="relative ">
-          <hr />
-          <Link
-            className="px-2 bg-zinc-700 text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
-            href={"/auth/signup"}
-          >
-            registrarse
-          </Link>
         </div>
       </div>
     </div>

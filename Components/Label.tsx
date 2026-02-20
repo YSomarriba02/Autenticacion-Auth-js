@@ -9,7 +9,7 @@ export default function Label({ text, htmlFor, state }: props) {
     <label
       htmlFor={htmlFor}
       onClick={(e: React.MouseEvent) => {}}
-      className={`${state == "" ? "-translate-y-1/2 text-base" : "-translate-y-[165%] text-sm"} peer-focus:text-sm px-2 pointer-events-none bg-zinc-700 absolute top-1/2  translate-x-2 text-gray-200 peer-focus:-translate-y-[165%]  peer-focus:text-blue-400 transition-transform ease-in duration-150`}
+      className={`${state == "" ? "-translate-y-1/2 text-[12px]" : "-translate-y-[185%] text-sm"} peer-focus:text-sm px-2 py-0 pointer-events-none absolute top-1/2  translate-x-2 text-text peer-focus:-translate-y-[185%] text-text bg-base peer-focus:text-blue-400 transition-transform ease-in duration-150`}
     >
       {text}
     </label>

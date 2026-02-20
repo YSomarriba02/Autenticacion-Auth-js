@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import BoxCambiarContraseña from "@/Components/BoxCambiarContraseña";
 import Modal from "@/Components/Modal";
+import ProfileOptions from "@/Components/ProfileOptions";
 import Image from "next/image";
 
 export default async function page() {
@@ -9,7 +10,7 @@ export default async function page() {
 
   if (!sesion) {
     return (
-      <div className="h-screen text-black">
+      <div className="h-screen">
         No autenticado, no puedes acceder al perfil
       </div>
     );
@@ -18,7 +19,7 @@ export default async function page() {
   const image = user.image as string;
   const name = user.name;
   return (
-    <div className="h-full min-h-screen flex flex-col gap-2 text-black md:px-16">
+    <div className="h-full min-h-screen flex flex-col gap-2 md:px-16">
       <div
         id="profile"
         className="flex flex-col-reverse gap-8 items-center lg:flex-row lg:items-end"
@@ -38,12 +39,7 @@ export default async function page() {
       </div>
       <Modal />
 
-      <div className="flex flex-col py-2 gap-2">
-        <BoxCambiarContraseña />
-        <p>Soporte</p>
-        <p>Calificar App</p>
-        <p>Otros...</p>
-      </div>
+      <ProfileOptions />
     </div>
   );
 }
