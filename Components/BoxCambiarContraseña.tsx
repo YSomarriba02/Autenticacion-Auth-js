@@ -17,21 +17,24 @@ export default function BoxCambiarContraseña({
 }: props) {
   return (
     <div
-      onClick={() => {
-        setIdAcordeon((prev) => {
-          if (prev == idBox) {
-            return null;
-          }
-          return idBox;
-        });
-      }}
       className={`${
         idAcordeon == idBox
           ? "h-auto [box-shadow:0px_1px_3px_1px_var(--text)] rounded-2xl pb-4"
-          : "h-12 rounded-sm"
+          : "h-11 rounded-sm"
       } bg-base flex flex-col p-2 w-full sm:w-3/4 lg:w-2/5 lg:self-start gap-4  transition-[height,border-radius] ease-linear duration-300 overflow-hidden`}
     >
-      <div id="content-show" className="flex items-center gap-2">
+      <div
+        onClick={() => {
+          setIdAcordeon((prev) => {
+            if (prev == idBox) {
+              return null;
+            }
+            return idBox;
+          });
+        }}
+        id="content-show"
+        className="flex items-center gap-2"
+      >
         <img
           src="/icons/password-icon.png"
           alt=""

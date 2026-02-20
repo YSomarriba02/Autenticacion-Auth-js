@@ -14,9 +14,9 @@ export default function Modal() {
     setShow(false);
   }
   return (
-    <>
+    <div className=" flex justify-center lg:justify-start">
       <ButtonSingOut abrirModal={abrirModal} />
       {show && <ModalCerrarSesion cerrarModal={cerrarModal} />}
-    </>
+    </div>
   );
 }

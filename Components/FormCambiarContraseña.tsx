@@ -1,13 +1,14 @@
-import React, { FormEvent, useActionState } from "react";
+import React, { FormEvent, startTransition, useActionState } from "react";
 import Field from "./Field";
 import {
   ActionCambiarContraseña,
-  cambiarContraseñaResult,
+  CambiarContraseñaResult,
 } from "@/app/lib/Actions/userActions";
+import LoadingText from "./LoadingText";
 
 export default function FormCambiarContraseña() {
   const [state, formAction, isPending] = useActionState<
-    cambiarContraseñaResult,
+    CambiarContraseñaResult,
     FormData
   >(ActionCambiarContraseña, null);
 
@@ -15,10 +16,17 @@ export default function FormCambiarContraseña() {
     e.preventDefault();
     const form = e.currentTarget as HTMLFormElement;
     const formData = new FormData(form);
-    formAction(formData);
+    startTransition(() => {
+      formAction(formData);
+    });
   }
   return (
-    <div className="px-4">
+    <div
+      className="px-4"
+      onClick={(e: any) => {
+        e.stopPropagation();
+      }}
+    >
       <form
         onSubmit={handleForm}
         className="flex flex-col gap-4"
@@ -26,7 +34,13 @@ export default function FormCambiarContraseña() {
           e.stopPropagation();
         }}
       >
-        {state && state.message}
+        {state && (
+          <span
+            className={`${state.state ? "text-green-400" : "text-red-400"} text-[12px]`}
+          >
+            {state.message}
+          </span>
+        )}
         <Field
           max={20}
           min={4}
@@ -43,8 +57,15 @@ export default function FormCambiarContraseña() {
           required={true}
           typeInput="password"
         />
-        <button className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md">
-          Cambiar
+        <button
+          disabled={isPending}
+          className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md"
+        >
+          <LoadingText
+            isPending={isPending}
+            loadingText="Cambiando"
+            text="Cambiar"
+          />
         </button>
       </form>
     </div>

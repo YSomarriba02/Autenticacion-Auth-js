@@ -2,12 +2,16 @@
 
 import { redirect } from "next/navigation"
 import { loginUser } from "../services/auth/loginUser"
-import { user } from "../types/user"
+import { user, userBd } from "../types/user"
 import { cookies } from "next/headers"
 import compararPassword from "@/utils/compararPassword"
 import signUp from "../services/auth/signUp"
-import { signIn } from "@/auth"
+import { auth, signIn } from "@/auth"
 import { AuthError } from "next-auth"
+import { use } from "react"
+import { findUserBd } from "../repositories/findUserBd"
+import encriptarPassword from "@/utils/encriptarPassword"
+import updatePassword from "../repositories/updatePassword"
 
 export type retorno = null | string
 
@@ -150,5 +154,42 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
             message: "contraseñas no coinciden", state: false
         }
     }
-    return null
+
+    const session = await auth();
+    const userSession = session?.user;
+
+    if (!userSession) {
+        return {
+            message: "No estas autenticado", state: false
+        }
+    }
+
+    const { email } = userSession
+    const user = await findUserBd(email!)
+    if (!user) {
+        return {
+            message: "Usuario no encontrado", state: false
+        }
+    }
+
+    const userBd = user as userBd
+    console.log(userBd);
+    if (userBd.provider_name != "credential") {
+        return {
+            message: "No disponible para proveedores", state: false
+        }
+    }
+
+    const hash = await encriptarPassword(password1);
+    const passwordUpdate = await updatePassword({ email: userBd.email, nuevaPassword: hash })
+
+    if (!passwordUpdate) {
+        return {
+            message: "No se pudo actualizar contraseña", state: false
+        }
+    }
+
+    return {
+        message: "Contraseña actualizada", state: true
+    }
 }

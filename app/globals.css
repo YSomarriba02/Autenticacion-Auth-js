@@ -74,6 +74,21 @@ body {
       transform: translateY(-100%) scale(0)
     }
   }
+
+
+
+
+  --animate-textEntrada: animacion-text-Entrada 1s ease forwards;
+
+  @keyframes animacion-text-entrada {
+    from {
+      transnform: translateX(0)
+    }
+
+    to {
+      transform: translateX(-100%)
+    }
+  }
 }
 
 .s {
