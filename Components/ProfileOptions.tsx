@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import BoxCambiarContraseña from "./BoxCambiarContraseña";
+import BoxReestablecerContraseña from "./BoxReestablecerContraseña";
 
 export default function ProfileOptions() {
   const [idAcordeon, setIdAcordeon] = useState<number | null>(null);
@@ -13,7 +14,7 @@ export default function ProfileOptions() {
         idAcordeon={idAcordeon}
         setIdAcordeon={setIdAcordeon}
       />
-      <BoxCambiarContraseña
+      <BoxReestablecerContraseña
         idBox={1}
         idAcordeon={idAcordeon}
         setIdAcordeon={setIdAcordeon}
