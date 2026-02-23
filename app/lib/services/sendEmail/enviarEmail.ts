@@ -1,57 +1,44 @@
-import { Resend } from "resend"
-import serviceCambioPasswordCodigo from "./serviceCambioPasswordCodigo"
-
-const resend_key = process.env.RESEND_KEY
-const resend = new Resend(resend_key)
-
+import { BrevoClient, Brevo } from '@getbrevo/brevo';
 
 type envioEmailType = {
-    to: string,
-    subject: string,
-    //html
-    //from
+  toEmail: string,
+  subject: string,
+  htmlContent: string,
 }
-async function enviarEmail({ subject, to }: envioEmailType) {
 
-    if (!to) return false
+const brevo = new BrevoClient({
+  apiKey: process.env.BREVO_KEY!,
+});
 
-    const codigo = await serviceCambioPasswordCodigo({ email: to });
-    if (!codigo) return false
+export async function enviarEmail({
+  toEmail,
+  subject,
+  htmlContent,
+}: envioEmailType): Promise<boolean> {
+  try {
+    const request: Brevo.SendTransacEmailRequest = {
+      subject,
+      htmlContent,
+      sender: {
+        name: process.env.SENDER_NAME!,
+        email: process.env.SENDER_EMAIL!,
+      },
+      to: [
+        {
+          email: toEmail,
+        },
+      ],
+    };
 
-    const from = "onboarding@resend.dev"  // por mientras consigo un dominio
-    const htmlTemplate =
-        `
-        <html>
-  <body style="margin:0; padding:20px; font-family:Arial, sans-serif; background:#f4f4f4;">
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td align="center">
-          <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; padding:20px; border-radius:8px;">
-            <tr>
-              <td>
-                <h2 style="color:#333; margin-bottom:16px;">Codigo de cambio password!</h2>
-                <p style="color:#555; line-height:1.5; margin-bottom:24px;">
-                  Codigo para cambiar tu password, copie este codigo
-                </p>
-                <p>${codigo}</p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </body>
-</html>
+    const response = await brevo.transactionalEmails.sendTransacEmail(request)
 
-    `
-    const text = `Se te el siguiente codigo para reestablecer tu contraseña copialo ${codigo}`
-    try {
-        const { data, error } = await resend.emails.send({ to, subject, from, html: htmlTemplate, text })
-        if (error) {
-            return false
-        }
-        return data
-    } catch (error) {
-        return false
+    console.log('Email enviado! Message ID:', response.messageId);
+    return true;
+  } catch (error: any) {
+    console.error('Error enviando email:', error.message);
+    if (error.body) {
+      console.error('Detalles de Brevo:', error.body);
     }
+    return false;
+  }
 }

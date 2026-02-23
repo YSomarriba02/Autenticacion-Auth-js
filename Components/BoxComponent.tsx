@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, SetStateAction, useState } from "react";
+import React, { ReactNode, SetStateAction, useEffect, useState } from "react";
 
 interface props {
   idBox: number;
@@ -48,7 +48,11 @@ export default function BoxComponent({
         />
         <p>{title}</p>
       </div>
-      {children}
+      <div
+        className={`${idAcordeon == idBox ? "opacity-100" : "opacity-0"}  transition-opacity duration-150 ease-in`}
+      >
+        {children}
+      </div>
     </div>
   );
 }

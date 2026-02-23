@@ -1,8 +1,16 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import React, {
+  SetStateAction,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import BoxComponent from "./BoxComponent";
 import OtpInput from "./OtpInput";
+import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
+import FormReestablecerPassword from "./FormReestablecerPassword";
 
 interface props {
   idAcordeon: number | null;
@@ -15,7 +23,9 @@ export default function BoxReestablecerContraseña({
   idBox,
   setIdAcordeon,
 }: props) {
-  const [state, setState] = useState(true);
+  const [state, setState] = useState(true); //estado para mostrar el boton de recibir codigo
+  const [codigoState, setCodigoState] = useState<boolean | string>(false);
+
   return (
     <BoxComponent
       icon="/icons/reestablecerPassword-icon.png"
@@ -24,25 +34,22 @@ export default function BoxReestablecerContraseña({
       setIdAcordeon={setIdAcordeon}
       title="Reestablecer contraseña"
     >
-      <div>
+      <div className={`${state ? "block" : "hidden"}`}>
         <button
-          onClick={() => {
+          onClick={async () => {
             setState(false);
+            const resp = await enviarEmailCodigoAction();
+            setCodigoState(resp);
           }}
-          className={`${state ? "scale-100" : "scale-0"} bg-blue-500 rounded-sm p-1 text-sm  border-2 border-black`}
+          className="bg-blue-500 rounded-sm p-1 text-sm  border-2 border-black"
         >
           Recibir codigo
         </button>
       </div>
-      {state || (
-        <form action="" className="flex gap-4">
-          <OtpInput name="input1" />
-          <OtpInput name="input1" />
-          <OtpInput name="input1" />
-          <OtpInput name="input1" />
-          <OtpInput name="input1" />
-        </form>
-      )}
+      <div className="flex flex-col items-center gap-2">
+        {codigoState && <span className="text-sm ">{codigoState}</span>}
+        {state || <FormReestablecerPassword show={state} />}
+      </div>
     </BoxComponent>
   );
 }

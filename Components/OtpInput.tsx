@@ -1,15 +1,40 @@
+import { Ref } from "react";
+
 interface props {
+  indice: number;
+  maxIndice: number;
   name: string;
+  handleKey: (incide: number) => void;
+  handleBackSpace: (incide: number) => void;
+  ref: Ref<HTMLInputElement> | undefined;
 }
 
-export default function OtpInput({ name }: props) {
+export default function OtpInput({
+  indice,
+  maxIndice,
+  handleKey,
+  handleBackSpace,
+  name,
+  ref,
+}: props) {
   return (
     <input
-      type="number"
+      ref={ref}
+      name={name}
+      type="text"
+      inputMode="numeric"
       minLength={1}
       maxLength={1}
-      name={name}
-      className="w-6 bg-(--text)"
-    />
+      pattern="[0-9]*"
+      onKeyUp={(e: React.KeyboardEvent) => {
+        const index = indice;
+        if (e.key !== "Backspace") {
+          handleKey(indice);
+          return;
+        }
+        handleBackSpace(indice);
+      }}
+      className="size-10 bg-(--text) text-background text-center rounded-sm"
+    ></input>
   );
 }

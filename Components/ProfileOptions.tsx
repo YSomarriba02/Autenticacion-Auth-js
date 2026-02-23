@@ -7,6 +7,8 @@ import BoxReestablecerContraseña from "./BoxReestablecerContraseña";
 export default function ProfileOptions() {
   const [idAcordeon, setIdAcordeon] = useState<number | null>(null);
 
+  console.log("ProgileOptions montado");
+
   return (
     <div className="flex flex-col py-2 gap-2 items-center">
       <BoxCambiarContraseña
@@ -16,16 +18,6 @@ export default function ProfileOptions() {
       />
       <BoxReestablecerContraseña
         idBox={1}
-        idAcordeon={idAcordeon}
-        setIdAcordeon={setIdAcordeon}
-      />
-      <BoxCambiarContraseña
-        idBox={2}
-        idAcordeon={idAcordeon}
-        setIdAcordeon={setIdAcordeon}
-      />
-      <BoxCambiarContraseña
-        idBox={3}
         idAcordeon={idAcordeon}
         setIdAcordeon={setIdAcordeon}
       />

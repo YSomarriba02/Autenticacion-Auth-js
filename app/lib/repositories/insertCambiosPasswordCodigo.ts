@@ -6,7 +6,8 @@ type CambiosPasswordCodigoType = {
 }
 
 export default async function insertCambiosPasswordCodigo({ id, codigo }: CambiosPasswordCodigoType) {
-    const insert = await querySQL2("insert into cambiosPasswCodigo(id,codigo) output inserted.id values(@id,@codigo)", [
+    console.log("nuevo cod en bd")
+    const insert = await querySQL2("insert into cambiosPasswCodigo(id_usuario,codigo) output inserted.id_usuario values(@id,@codigo)", [
         { name: "id", type: "number", value: id }, { name: "codigo", type: "string", value: codigo }
     ])
 

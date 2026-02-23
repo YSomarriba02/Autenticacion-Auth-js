@@ -136,8 +136,9 @@ export async function registrarSesion(prevState: retorno, formData: FormData) {
 //     //     else { console.log("Error específico:", result.error) }
 //     // }
 // }
-
 // registrar sesion --------------------------
+
+
 
 export type CambiarContraseñaResult = CambiarContraseñaState | null
 
