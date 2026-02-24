@@ -38,7 +38,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
 
 
             console.log("ya termino la penalizacion, se reenviara uno nuevo");
-            const nuevoCodigo = String(generarCodigo())
+            const nuevoCodigo = generarCodigo()
             const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
             if (!update) return false
 
@@ -53,7 +53,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
 
         if (isFechaExpirada({ fecha: findCodigo.fecha_creacion, aumentoTime: TIEMPOVALIDOCODIGO })) {
             console.log("codigo ya vencio, se reenviara uno nuevo");
-            const nuevoCodigo = String(generarCodigo())
+            const nuevoCodigo = generarCodigo()
             const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
             if (!update) return false
 
@@ -70,7 +70,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
 
 
     }
-    const codigo = String(generarCodigo())
+    const codigo = generarCodigo()
     const insertCod = await insertCambiosPasswordCodigo({ id, codigo })
 
     if (!insertCod) return false

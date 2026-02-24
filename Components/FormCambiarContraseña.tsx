@@ -44,16 +44,16 @@ export default function FormCambiarContraseña() {
         <Field
           max={20}
           min={4}
-          name="password1"
-          text="contraseña"
+          name="passwordActual"
+          text="contraseña actual"
           required={true}
           typeInput="password"
         />
         <Field
           max={20}
           min={4}
-          name="password2"
-          text="confirmar contraseña"
+          name="passwordNueva"
+          text="contraseña nueva"
           required={true}
           typeInput="password"
         />

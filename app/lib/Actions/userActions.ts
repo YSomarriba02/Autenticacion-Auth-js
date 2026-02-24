@@ -12,6 +12,7 @@ import { use } from "react"
 import { findUserBd } from "../repositories/findUserBd"
 import encriptarPassword from "@/utils/encriptarPassword"
 import updatePassword from "../repositories/updatePassword"
+import compararHashes from "@/utils/compararHashes"
 
 export type retorno = null | string
 
@@ -148,11 +149,12 @@ interface CambiarContraseñaState {
 }
 
 export async function ActionCambiarContraseña(prevState: CambiarContraseñaResult, formData: FormData): Promise<CambiarContraseñaResult> {
-    const password1 = formData.get("password1") as string
-    const password2 = formData.get("password2") as string
-    if (!compararPassword(password1, password2)) {
+    const passwordActual = formData.get("passwordActual") as string
+    const passwordNueva = formData.get("passwordNueva") as string
+
+    if (!passwordActual || !passwordNueva) {
         return {
-            message: "contraseñas no coinciden", state: false
+            state: false, message: "Complete los campos"
         }
     }
 
@@ -166,23 +168,31 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
     }
 
     const { email } = userSession
-    const user = await findUserBd(email!)
-    if (!user) {
+    const userBd = await findUserBd(email!)
+    if (!userBd) {
         return {
             message: "Usuario no encontrado", state: false
         }
     }
 
-    const userBd = user as userBd
-    console.log(userBd);
-    if (userBd.provider_name != "credential") {
+    const user = userBd as userBd
+    console.log(user);
+    if (user.provider_name != "credential") {
         return {
             message: "No disponible para proveedores", state: false
         }
     }
 
-    const hash = await encriptarPassword(password1);
-    const passwordUpdate = await updatePassword({ email: userBd.email, nuevaPassword: hash })
+    const isPasswordActualValid = await compararHashes(passwordActual, user.passw!)
+
+    if (!isPasswordActualValid) {
+        return {
+            state: false, message: "Contraseña actual no es valida"
+        }
+    }
+
+    const hash = await encriptarPassword(passwordNueva);
+    const passwordUpdate = await updatePassword({ email: user.email, nuevaPassword: hash })
 
     if (!passwordUpdate) {
         return {
@@ -194,3 +204,4 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
         message: "Contraseña actualizada", state: true
     }
 }
+

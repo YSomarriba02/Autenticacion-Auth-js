@@ -1,4 +1,10 @@
-import { startTransition, useActionState, useEffect, useRef } from "react";
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import OtpInput from "./OtpInput";
 import {
   enviarCodigoAction,
@@ -52,23 +58,25 @@ export default function FormReestablecerPassword({ show }: { show: boolean }) {
     inputsRef.current[indice - 1]?.focus();
   }
   return (
-    <form ref={formRef} action="" className="flex gap-4 justify-center">
-      {state.state && <p>{state.message}</p>}
-      {inputsRef.current.map((e, i, arr) => {
-        return (
-          <OtpInput
-            key={i}
-            indice={i}
-            maxIndice={arr.length}
-            handleKey={handleKey}
-            handleBackSpace={handleBackspace}
-            name={`otpinput`}
-            ref={(el: HTMLInputElement) => {
-              inputsRef.current[i] = el;
-            }}
-          />
-        );
-      })}
-    </form>
+    <>
+      {<span className="text-sm">{state.message}</span>}
+      <form ref={formRef} action="" className="flex gap-4 justify-center">
+        {inputsRef.current.map((e, i, arr) => {
+          return (
+            <OtpInput
+              key={i}
+              indice={i}
+              maxIndice={arr.length}
+              handleKey={handleKey}
+              handleBackSpace={handleBackspace}
+              name={`otpinput`}
+              ref={(el: HTMLInputElement) => {
+                inputsRef.current[i] = el;
+              }}
+            />
+          );
+        })}
+      </form>
+    </>
   );
 }

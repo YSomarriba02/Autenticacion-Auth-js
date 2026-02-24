@@ -47,7 +47,7 @@ export default function BoxReestablecerContraseña({
         </button>
       </div>
       <div className="flex flex-col items-center gap-2">
-        {codigoState && <span className="text-sm ">{codigoState}</span>}
+        {codigoState && <span className="text-sm">{codigoState}</span>}
         {state || <FormReestablecerPassword show={state} />}
       </div>
     </BoxComponent>

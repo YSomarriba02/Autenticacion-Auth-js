@@ -1,5 +1,6 @@
 import querySQL2, { param } from "../bd";
 
+
 interface userInsertParams {
     email: string, password?: string, provider?: string
 }

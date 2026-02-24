@@ -27,14 +27,13 @@ export default function OtpInput({
       maxLength={1}
       pattern="[0-9]*"
       onKeyUp={(e: React.KeyboardEvent) => {
-        const index = indice;
         if (e.key !== "Backspace") {
           handleKey(indice);
           return;
         }
         handleBackSpace(indice);
       }}
-      className="size-10 bg-(--text) text-background text-center rounded-sm"
+      className="size-10 bg-(--text) text-background text-center rounded-sm focus:outline-4  focus:outline-blue-600"
     ></input>
   );
 }

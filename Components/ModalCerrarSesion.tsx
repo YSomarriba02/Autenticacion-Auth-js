@@ -49,7 +49,7 @@ export default function ModalCerrarSesion({ cerrarModal: close }: props) {
     <div
       onClick={cerrarModal}
       ref={refModal}
-      className=" fixed inset-0 bg-[#08080856] backdrop-blur-[5px] -translate-y-full"
+      className=" fixed inset-0 bg-[#08080856] backdrop-blur-[5px] -translate-y-full z-10"
     >
       <div
         onClick={stopProgragation}

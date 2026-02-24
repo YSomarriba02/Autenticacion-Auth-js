@@ -4,6 +4,11 @@ import findPasswordCodigo from "../../repositories/findPasswordCodigo";
 import { findUserBd } from "../../repositories/findUserBd"
 import { cambioPasswCodigo } from "../../types/cambioPasswordCodigo";
 import { user } from "../../types/user";
+import updatePasswordCodigoIntento from "../../repositories/updatePasswordCodigoIntento";
+import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
+import generarCodigo from "@/utils/generarCodigo";
+import templateFunction from "../../email-templates/templateFunction";
+import { enviarEmail } from "./enviarEmail";
 
 
 type typeRetorno = {
@@ -11,11 +16,17 @@ type typeRetorno = {
     message: string
 }
 
+export type typeObjMensajesInvalidos = {
+    intentosExcedidos: string
+    codigoIncorrecto: string
+    codigoExpirado: string
+    intentosExcedidosIspenalizado: string
+}
+
 export default async function validarCambioPasswordCodigo({ email, codigo }: { email: string, codigo: string }): Promise<typeRetorno> {
 
     try {
         if (!codigo || !email) {
-
             throw new CodigoError("Faltan parametros")
         }
 
@@ -30,14 +41,56 @@ export default async function validarCambioPasswordCodigo({ email, codigo }: { e
         }
 
         const { codigo: codigoCambio, fecha_creacion, id_usuario, intentos } = codigoBd
-        const mensajeInvalido = validarCodigo({ fecha_creacion, codigoCambio, codigo, intentos, id: id_usuario })
-        if (mensajeInvalido) {
 
-            if (mensajeInvalido == "codigo expirado, se envio uno nuevo") {
 
-            }
-            throw new CodigoError(mensajeInvalido as string)
+        const objMensajesInvalidos: typeObjMensajesInvalidos = {
+            intentosExcedidos: "Este codigo ya vencio, hemos enviando uno nuevo",
+            codigoIncorrecto: "Codigo incorrecto",
+            codigoExpirado: "codigo expirado, se envio uno nuevo",
+            intentosExcedidosIspenalizado: "Ya fallo 3 veces, intentelo mas tarde"
         }
+        const mensajeInvalido = validarCodigo({ fecha_creacion, codigoCambio, codigo, intentos })
+
+        //Si el otp ingresado no es valido se aumenta la cant intentos
+        if (mensajeInvalido == "codigoIncorrecto") {
+            updatePasswordCodigoIntento({ id: id_usuario, intentos: intentos + 1 })
+            return {
+                state: false, message: objMensajesInvalidos[mensajeInvalido]
+            }
+        }
+
+        //si ya hay 3 intentos y aun sigue penalizado
+        if (mensajeInvalido == "intentosExcedidosIspenalizado") {
+            return {
+                state: false, message: objMensajesInvalidos[mensajeInvalido]
+            }
+        }
+
+        //si ya hay 3 intentos, se envia un cod nuevo y se actualiza en la bd
+        if (mensajeInvalido == "intentosExcedidos") {
+            const nuevoCodigo = generarCodigo()
+            await updatePasswordCodigo({ id: id_usuario, nuevoCodigo })
+            const title = "Reenvio de Codigo para cambiar tu password, copie este codigo"
+            const template = templateFunction({ codigo: nuevoCodigo, title })
+            const subject = "codigo cambio password"
+            enviarEmail({ htmlContent: template, subject, toEmail: email })
+            return {
+                state: false, message: objMensajesInvalidos[mensajeInvalido]
+            }
+        }
+
+        //si el codigo simplemente expiro se envia uno nuevo
+        if (mensajeInvalido == "codigoExpirado") {
+            return {
+                state: false, message: objMensajesInvalidos[mensajeInvalido]
+            }
+        }
+
+        return {
+            state: true, message: "contraseña reestablecida"
+        }
+
+
 
     } catch (error) {
         if (error instanceof CodigoError) {
@@ -50,9 +103,4 @@ export default async function validarCambioPasswordCodigo({ email, codigo }: { e
             message: "Ocurrio un error", state: false
         }
     }
-
-    return {
-        message: "valido", state: true
-    }
-
 }
