@@ -59,7 +59,13 @@ export default function FormReestablecerPassword({ show }: { show: boolean }) {
   }
   return (
     <>
-      {<span className="text-sm">{state.message}</span>}
+      {
+        <span
+          className={`${state.state ? "text-green-400" : "text-red-300"} text-sm text-start `}
+        >
+          {state.message}
+        </span>
+      }
       <form ref={formRef} action="" className="flex gap-4 justify-center">
         {inputsRef.current.map((e, i, arr) => {
           return (

@@ -43,12 +43,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         console.log(account);
         const email = user.email as string;
         const usuarioBd = await findUserBd(email);
+        const provider = account?.provider as string;
         if (!usuarioBd) {
-          const provider = account?.provider as string;
           signUpWithProvider(email, provider);
         }
         token.email = user.email;
         token.picture = user.image;
+        token.provider = provider;
+        console.log(provider);
 
         const nombre = user.name?.split(" ")[0];
         const appellido = user.name?.split(" ")[2] || "";
@@ -62,6 +64,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       session.user.email = token.email!;
       session.user.image = token.picture;
       session.user.name = token.name;
+      session.user.provider = token.provider as string;
       return session;
     },
   },

@@ -59,7 +59,7 @@ export default function FormCambiarContraseña() {
         />
         <button
           disabled={isPending}
-          className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md"
+          className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md text-sm"
         >
           <LoadingText
             isPending={isPending}

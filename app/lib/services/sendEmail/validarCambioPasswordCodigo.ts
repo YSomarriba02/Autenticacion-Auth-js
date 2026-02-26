@@ -3,7 +3,7 @@ import validarCodigo from "@/utils/validarCodigo";
 import findPasswordCodigo from "../../repositories/findPasswordCodigo";
 import { findUserBd } from "../../repositories/findUserBd"
 import { cambioPasswCodigo } from "../../types/cambioPasswordCodigo";
-import { user } from "../../types/user";
+import { user, userBd } from "../../types/user";
 import updatePasswordCodigoIntento from "../../repositories/updatePasswordCodigoIntento";
 import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
 import generarCodigo from "@/utils/generarCodigo";
@@ -31,9 +31,14 @@ export default async function validarCambioPasswordCodigo({ email, codigo }: { e
         }
 
         const userBd = await findUserBd(email);
-        const user = userBd as user
+        const user = userBd as userBd
 
         const idUser = user.id
+        if (user.provider_name != "credential") {
+            return {
+                state: false, message: "No disponible para proveedores externos"
+            }
+        }
         const codigoBd = await findPasswordCodigo({ id: idUser }) as cambioPasswCodigo
         console.log(codigoBd)
         if (!codigoBd) {

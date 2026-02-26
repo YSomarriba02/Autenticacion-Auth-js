@@ -23,6 +23,5 @@ export default function validarCodigo({ fecha_creacion, intentos, codigoCambio, 
     if (new Date().getTime() > f_creacion) {
         return "codigoExpirado"
     }
-
     return false
 }

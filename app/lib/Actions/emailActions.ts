@@ -14,12 +14,6 @@ export async function enviarCodigoAction(prevState: enviarCodigoActionType, form
     const codigo = arr.join("")
     const cantidadDigitos = codigo.length
 
-    // console.log(codigo);
-    // console.log(typeof (codigo))
-    // return {
-    //     state: false, message: ""
-    // }
-
     if (cantidadDigitos < 5) {
         return {
             state: false, message: ""
@@ -52,3 +46,5 @@ export async function enviarEmailCodigoAction() {
     const resp = await serviceCambioPasswordCodigo({ email })
     return resp
 }
+
+

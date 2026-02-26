@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ButtonAuth from "./ButtonAuth";
 import Field from "./Field";
 import Link from "next/link";
@@ -14,9 +14,15 @@ export default function Login() {
   const [error, setError] = useState<null | string>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    if (status == "authenticated") {
+      router.push("/profile");
+      router.refresh();
+    }
+  }, [status]);
+
   if (status == "authenticated") {
-    router.replace("/");
-    return <></>;
+    return null;
   }
 
   return (
@@ -30,6 +36,7 @@ export default function Login() {
             setPending(true);
             const form = e.target as HTMLFormElement;
             const formData = new FormData(form);
+
             const resp = await signIn("credentials", {
               email: formData.get("email"),
               password: formData.get("password"),
@@ -42,7 +49,7 @@ export default function Login() {
               setError("Credenciales invalidas");
               return;
             }
-            router.push(resp?.url || "/");
+            console.log(resp);
           }}
           className="mt-4 flex flex-col gap-4 md:gap-6"
         >

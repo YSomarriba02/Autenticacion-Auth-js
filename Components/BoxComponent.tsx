@@ -51,7 +51,7 @@ export default function BoxComponent({
       <div
         className={`${idAcordeon == idBox ? "opacity-100" : "opacity-0"}  transition-opacity duration-150 ease-in`}
       >
-        {children}
+        <div inert={idAcordeon != idBox}>{children}</div>
       </div>
     </div>
   );

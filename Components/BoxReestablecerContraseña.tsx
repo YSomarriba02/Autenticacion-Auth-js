@@ -1,14 +1,7 @@
 "use client";
 
-import React, {
-  SetStateAction,
-  useActionState,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import BoxComponent from "./BoxComponent";
-import OtpInput from "./OtpInput";
 import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
 import FormReestablecerPassword from "./FormReestablecerPassword";
 
@@ -26,6 +19,14 @@ export default function BoxReestablecerContraseña({
   const [state, setState] = useState(true); //estado para mostrar el boton de recibir codigo
   const [codigoState, setCodigoState] = useState<boolean | string>(false);
 
+  useEffect(() => {
+    if (!state) {
+      setTimeout(() => {
+        setCodigoState(false);
+      }, 6000);
+    }
+  }, [state]);
+
   return (
     <BoxComponent
       icon="/icons/reestablecerPassword-icon.png"
@@ -34,14 +35,14 @@ export default function BoxReestablecerContraseña({
       setIdAcordeon={setIdAcordeon}
       title="Reestablecer contraseña"
     >
-      <div className={`${state ? "block" : "hidden"}`}>
+      <div className={`${state ? "block" : "hidden"} flex flex-col px-4`}>
         <button
           onClick={async () => {
             setState(false);
             const resp = await enviarEmailCodigoAction();
             setCodigoState(resp);
           }}
-          className="bg-blue-500 rounded-sm p-1 text-sm  border-2 border-black"
+          className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md text-sm"
         >
           Recibir codigo
         </button>
