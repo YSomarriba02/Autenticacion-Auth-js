@@ -4,6 +4,6 @@ import insertUserBd from "../../repositories/insertUserBd"
 export default async function signUpWithProvider(email: string, provider: string) {
     if (!email || !provider) return false
 
-    const user = await insertUserBd({ email, provider })
+    const user = await insertUserBd({ email, provider, isVerificado: true })
     return user
 }

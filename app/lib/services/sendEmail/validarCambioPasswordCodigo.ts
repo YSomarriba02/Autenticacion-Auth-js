@@ -75,8 +75,8 @@ export default async function validarCambioPasswordCodigo({ email, codigo }: { e
         if (mensajeInvalido == "intentosExcedidos") {
             const nuevoCodigo = generarCodigo()
             await updatePasswordCodigo({ id: id_usuario, nuevoCodigo })
-            const title = "Reenvio de Codigo para cambiar tu password, copie este codigo"
-            const template = templateFunction({ codigo: nuevoCodigo, title })
+            const text = "Reenvio de Codigo para cambiar tu password, copie este codigo"
+            const template = templateFunction({ contenido: nuevoCodigo, text, titulo: "Reestablecer Password" })
             const subject = "codigo cambio password"
             enviarEmail({ htmlContent: template, subject, toEmail: email })
             return {

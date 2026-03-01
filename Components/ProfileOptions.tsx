@@ -16,9 +16,12 @@ export default function ProfileOptions() {
     return <div>cargando ...</div>;
   }
 
+  console.log(sessionStatus);
+  console.log(provider);
+
   return (
     <div className="flex flex-col py-2 gap-2 items-center">
-      {sessionStatus == "authenticated" && provider == "credentials" && (
+      {sessionStatus == "authenticated" && provider == "credential" && (
         <>
           <BoxCambiarContraseña
             idBox={0}

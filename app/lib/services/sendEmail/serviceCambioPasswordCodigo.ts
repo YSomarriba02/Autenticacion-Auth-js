@@ -43,8 +43,8 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
             const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
             if (!update) return false
 
-            const title = "Reenvio de Codigo para cambiar tu password, tienes 3 intentos, copie este codigo"
-            const template = templateFunction({ codigo: nuevoCodigo, title })
+            const text = "Reenvio de Codigo para cambiar tu password, tienes 3 intentos, copie este codigo"
+            const template = templateFunction({ contenido: nuevoCodigo, text, titulo: "Reestablecer Password" })
             const subject = "codigo cambio password"
             enviarEmail({ htmlContent: template, subject, toEmail: email })
             return "Se le proporciono un nuevo cod, revise su correo"
@@ -57,8 +57,8 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
             const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
             if (!update) return false
 
-            const title = "Reenvio de Codigo para cambiar tu password, copie este codigo"
-            const template = templateFunction({ codigo: nuevoCodigo, title })
+            const text = "Reenvio de Codigo para cambiar tu password, copie este codigo"
+            const template = templateFunction({ contenido: nuevoCodigo, text, titulo: "Reestablecer Password" })
             const subject = "codigo cambio password"
             enviarEmail({ htmlContent: template, subject, toEmail: email })
             return "Nuevo cod enviado, revise su correo"
@@ -70,8 +70,8 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
     const insertCod = await insertCambiosPasswordCodigo({ id, codigo })
     if (!insertCod) return false
 
-    const title = "Codigo para cambiar tu password, copie este codigo"
-    const template = templateFunction({ codigo, title })
+    const text = "Codigo para cambiar tu password, copie este codigo"
+    const template = templateFunction({ contenido: codigo, text, titulo: "Reestablecer Password" })
     const subject = "codigo cambio password"
     enviarEmail({ htmlContent: template, subject, toEmail: email })
     return "Enviamos un codigo a tu correo, copialo y pegalo aqui"

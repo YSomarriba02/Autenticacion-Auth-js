@@ -56,8 +56,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const appellido = user.name?.split(" ")[2] || "";
 
         token.name = `${nombre} ${appellido}`;
+        console.log(token);
       }
 
+      console.log("retornando token");
+      console.log(token);
       return token;
     },
     async session({ session, token }) {

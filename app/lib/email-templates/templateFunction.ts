@@ -1,10 +1,11 @@
 
 interface templateFunctiontype {
-    title: string,
-    codigo: string
+  titulo: string,
+  contenido: string,
+  text: string
 }
-export default function templateFunction({ codigo, title }: templateFunctiontype) {
-    return `
+export default function templateFunction({ contenido, titulo, text }: templateFunctiontype) {
+  return `
         <html>
   <body style="margin:0; padding:20px; font-family:Arial, sans-serif; background:#f4f4f4;">
     <table width="100%" cellpadding="0" cellspacing="0">
@@ -13,11 +14,11 @@ export default function templateFunction({ codigo, title }: templateFunctiontype
           <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff; padding:20px; border-radius:8px;">
             <tr>
               <td>
-                <h2 style="color:#333; margin-bottom:16px;">Codigo de cambio password!</h2>
+                <h2 style="color:#333; margin-bottom:16px;">${titulo}</h2>
                 <p style="color:#555; line-height:1.5; margin-bottom:24px;">
-                  ${title}
+                  ${text}
                 </p>
-                <p>${codigo}</p>
+                <p>${contenido}</p>
               </td>
             </tr>
           </table>

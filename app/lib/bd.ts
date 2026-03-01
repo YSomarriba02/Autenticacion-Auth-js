@@ -25,7 +25,7 @@ async function getPool() {
 const typesSql = {
     string: sql.VarChar,
     number: sql.Int,
-    boolean: sql.Binary
+    boolean: sql.Bit
 }
 
 type sqlTypes = keyof typeof typesSql
