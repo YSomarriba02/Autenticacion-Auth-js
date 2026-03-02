@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Field from "./Field";
 import ButtonAuth from "./ButtonAuth";
-import { registrarSesion } from "@/app/lib/Actions/userActions";
+import { registrarSesion, retorno } from "@/app/lib/Actions/userActions";
 import { useActionState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -12,10 +12,10 @@ export default function Signup() {
   const session = useSession();
   const { status } = session;
   const router = useRouter();
-  const [state, formAction, isPending] = useActionState<
-    null | string,
-    FormData
-  >(registrarSesion, null);
+  const [state, formAction, isPending] = useActionState<retorno, FormData>(
+    registrarSesion,
+    null,
+  );
 
   if (status == "authenticated") {
     return router.replace("/");
@@ -25,7 +25,13 @@ export default function Signup() {
     <div className="h-screen">
       <div className="p-4 flex flex-col absolute left-0 right-0 m-auto w-5/6 bg-base [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
         <p className="text-4xl">Sign Up</p>
-        {state && <span className="text-red-600">{state}</span>}
+        {state && (
+          <span
+            className={`${state.state ? "text-green-400" : "text-red-500"}`}
+          >
+            {state.message}
+          </span>
+        )}
         <form action={formAction} className="mt-4 flex flex-col gap-4 md:gap-6">
           <Field
             max={30}

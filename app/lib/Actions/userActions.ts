@@ -1,36 +1,37 @@
 "use server"
-
-import { redirect } from "next/navigation"
-import { loginUser } from "../services/auth/loginUser"
-import { user, userBd } from "../types/user"
-import { cookies } from "next/headers"
+import { userBd } from "../types/user"
 import compararPassword from "@/utils/compararPassword"
 import signUp from "../services/auth/signUp"
-import { auth, signIn } from "@/auth"
-import { AuthError } from "next-auth"
-import { use } from "react"
+import { auth } from "@/auth"
 import { findUserBd } from "../repositories/findUserBd"
 import encriptarPassword from "@/utils/encriptarPassword"
 import updatePassword from "../repositories/updatePassword"
 import compararHashes from "@/utils/compararHashes"
 
-export type retorno = null | string
-
 
 // registrar sesion --------------------------
+export interface signUpReturn {
+    state: boolean,
+    message: string
+}
 
-export async function registrarSesion(prevState: retorno, formData: FormData) {
+export type retorno = signUpReturn | null
+
+export async function registrarSesion(prevState: retorno, formData: FormData): Promise<retorno> {
     const email = formData.get("email") as string
     const password1 = formData.get("password1") as string
     const password2 = formData.get("password2") as string
 
     if (!email || !password1 || !password2) {
-        console.log("falta un campo");
-        return null
+        return {
+            state: false, message: "Complete los campos requeridos"
+        }
     }
 
     if (!compararPassword(password1, password2)) {
-        return "password no coinciden"
+        return {
+            state: false, message: "password no coinciden"
+        }
     }
 
 
@@ -44,27 +45,14 @@ export async function registrarSesion(prevState: retorno, formData: FormData) {
     // 2- Esta que aplique aca capturar manualmente la exepcion y proceder con ello.
 
     try {
-
-        const user = await signUp(email, password1)
-        if (typeof user == "string") {
-            return user.toString()
-        }
-        const result = await signIn("credentials", {
-            email, password: password1, redirect: false, redirectTo: "/profile"
-        })
-
+        const registro = await signUp(email, password1)
+        return { state: true, message: registro }
 
     } catch (error) {
-
-        if (error instanceof AuthError || error) {
-            console.error(error)
-            console.log("error con authjs")
-            return null
+        return {
+            state: false, message: "Ocurrio un error"
         }
-        return "credenciales no validas"
     }
-    redirect("/profile")
-
 }
 
 
