@@ -12,10 +12,13 @@ import React, {
   useState,
 } from "react";
 import { useFormContext } from "./Provider";
+import { useEmailContext } from "./ProviderEmail";
 
 export default function FormReestablecerPassword() {
   const formContext = useFormContext();
   const { setShowForm } = formContext!;
+  const emailContext = useEmailContext();
+  const { setEmail } = emailContext!;
   const [state, formAction, isPending] = useActionState<
     reestablecerContraseñaResult,
     FormData
@@ -33,6 +36,7 @@ export default function FormReestablecerPassword() {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.currentTarget.value;
     setInputState(value);
+    setEmail(value);
   }
 
   function handlerCancelar() {

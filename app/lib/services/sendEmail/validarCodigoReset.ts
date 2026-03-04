@@ -23,7 +23,7 @@ export type typeObjMensajesInvalidos = {
     intentosExcedidosIspenalizado: string
 }
 
-export default async function validarCambioPasswordCodigo({ email, codigo }: { email: string, codigo: string }): Promise<typeRetorno> {
+export default async function validarCodigoReset({ email, codigo }: { email: string, codigo: string }): Promise<typeRetorno> {
 
     try {
         if (!codigo || !email) {
@@ -34,7 +34,7 @@ export default async function validarCambioPasswordCodigo({ email, codigo }: { e
         const user = userBd as userBd
 
         const idUser = user.id
-        if (user.provider_name != "credential") {
+        if (user.provider_name != "credentials") {
             return {
                 state: false, message: "No disponible para proveedores externos"
             }

@@ -1,7 +1,7 @@
 "use server"
 
 import { auth } from "@/auth"
-import validarCambioPasswordCodigo from "../services/sendEmail/validarCambioPasswordCodigo"
+import validarCodigoReset from "../services/sendEmail/validarCodigoReset"
 import serviceCambioPasswordCodigo from "../services/sendEmail/serviceCambioPasswordCodigo"
 
 export type enviarCodigoActionType = {
@@ -9,7 +9,30 @@ export type enviarCodigoActionType = {
     message: string
 }
 
-export async function enviarCodigoAction(prevState: enviarCodigoActionType, formData: FormData): Promise<enviarCodigoActionType> {
+
+//Si no le paso email buscae el email del auth
+export async function ActionValidarCodigoReset(prevState: enviarCodigoActionType, formData: FormData, emailParam?: string | undefined): Promise<enviarCodigoActionType> {
+
+    let email: string | null = null;
+    if (!emailParam) {
+        const session = await auth()
+        email = session?.user.email ?? null
+
+        if (!email) {
+            return {
+                message: "Autenticate primero", state: false
+            }
+        }
+    }
+    else {
+        email = emailParam.toString().trim() ?? null
+        if (!email) {
+            return {
+                message: "Ingresa el email", state: false
+            }
+        }
+    }
+
     const arr = formData.getAll("otpinput")
     const codigo = arr.join("")
     const cantidadDigitos = codigo.length
@@ -20,23 +43,10 @@ export async function enviarCodigoAction(prevState: enviarCodigoActionType, form
         }
     }
 
-    const session = await auth()
-    const user = session?.user
-    const email = user?.email
-
-    if (!email || !user) {
-        return {
-            message: "autenticate primero", state: false
-        }
-    }
-
-    const { message, state } = await validarCambioPasswordCodigo({ email, codigo })
-
-
+    const { message, state } = await validarCodigoReset({ email, codigo })
     return {
         message, state
     }
-
 }
 
 

@@ -1,21 +1,33 @@
 import { startTransition, useActionState, useEffect, useRef } from "react";
 import OtpInput from "./OtpInput";
 import {
-  enviarCodigoAction,
+  ActionValidarCodigoReset,
   enviarCodigoActionType,
 } from "@/app/lib/Actions/emailActions";
 
+interface props {
+  show: boolean;
+  email?: string;
+}
+
 // si se le pasa true, se muestra y se monta el focus
-export default function FormOtp({ show }: { show: boolean }) {
+export default function FormOtp({ show, email }: props) {
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
     new Array(5).fill(null),
   );
-
   const formRef = useRef<HTMLFormElement>(null);
+
+  function validarCodigoReset(
+    prevState: enviarCodigoActionType,
+    formData: FormData,
+  ) {
+    return ActionValidarCodigoReset(prevState, formData, email);
+  }
+
   const [state, formAction, isPending] = useActionState<
     enviarCodigoActionType,
     FormData
-  >(enviarCodigoAction, { message: "", state: false });
+  >(validarCodigoReset, { message: "", state: false });
 
   useEffect(() => {
     if (inputsRef.current[0] && show) {
