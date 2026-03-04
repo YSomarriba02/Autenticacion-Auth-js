@@ -1,6 +1,6 @@
 import { BrevoClient, Brevo } from '@getbrevo/brevo';
 
-type envioEmailType = {
+export type envioEmailType = {
   toEmail: string,
   subject: string,
   htmlContent: string,

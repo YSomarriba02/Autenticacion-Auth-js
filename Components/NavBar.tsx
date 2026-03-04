@@ -10,7 +10,7 @@ export default async function NavBar() {
   const image = user?.image || "";
 
   const linkDinamico: navLink = {
-    href: session ? "/profile" : "/auth",
+    href: session ? "/profile" : "/auth/signin",
     text: session ? "yo" : "Iniciar",
     icon: image,
   };

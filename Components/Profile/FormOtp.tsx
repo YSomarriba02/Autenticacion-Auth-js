@@ -1,17 +1,12 @@
-import {
-  startTransition,
-  useActionState,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 import OtpInput from "./OtpInput";
 import {
   enviarCodigoAction,
   enviarCodigoActionType,
 } from "@/app/lib/Actions/emailActions";
 
-export default function FormReestablecerPassword({ show }: { show: boolean }) {
+// si se le pasa true, se muestra y se monta el focus
+export default function FormOtp({ show }: { show: boolean }) {
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
     new Array(5).fill(null),
   );
@@ -23,8 +18,10 @@ export default function FormReestablecerPassword({ show }: { show: boolean }) {
   >(enviarCodigoAction, { message: "", state: false });
 
   useEffect(() => {
-    if (inputsRef.current[0]) {
-      inputsRef.current[0].focus();
+    if (inputsRef.current[0] && show) {
+      setTimeout(() => {
+        inputsRef.current[0]!.focus();
+      }, 700);
     }
   }, [show]);
 

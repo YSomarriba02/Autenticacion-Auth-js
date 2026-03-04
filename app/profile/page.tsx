@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
-import BoxCambiarContraseña from "@/Components/BoxCambiarContraseña";
-import Modal from "@/Components/Modal";
-import ProfileOptions from "@/Components/ProfileOptions";
+import Modal from "@/Components/Profile/Modal";
+import ProfileOptions from "@/Components/Profile/ProfileOptions";
 import Image from "next/image";
 
 export default async function page() {

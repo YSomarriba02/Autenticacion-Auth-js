@@ -47,6 +47,11 @@ body {
   }
 }
 
+@custom-variant sm-mini {
+  @media (max-width: 21rem) {
+    @slot;
+  }
+}
 
 @theme {
   --animate-entradaModal: animacion-entrada-modal 1s ease forwards;

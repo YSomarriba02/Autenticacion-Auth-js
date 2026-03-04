@@ -50,6 +50,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.picture = user.image;
         token.provider = provider;
         console.log(provider);
+        console.log(account);
 
         const nombre = user.name?.split(" ")[0];
         const appellido = user.name?.split(" ")[2] || "";

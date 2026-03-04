@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import ButtonAuth from "./ButtonAuth";
-import Field from "./Field";
+import Field from "../Field/Field";
 import Link from "next/link";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -69,13 +69,21 @@ export default function Login() {
             text="contraseña"
             typeInput={"password"}
           />
-          <div className="relative ">
+          {/* <div className="relative ">
             <hr />
             <Link
               className="px-2 bg-base text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
               href={"/auth/signup"}
             >
               registrarse
+            </Link>
+          </div> */}
+          <div className="flex justify-between gap-4 px-4 m-0">
+            <Link className="text-blue-400 md:text-lg" href={"/auth/signup"}>
+              registrarse
+            </Link>
+            <Link href={"/auth/signin/reestablecerpassword"}>
+              Olvido la contraseña
             </Link>
           </div>
           <button

@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-(--text)  transition-colors duration-300 ease-out`}
       >
         <NavBar />
-        <main className="mt-10 p-10 pt-[5vh] h-full">
+        <main className="p-10 h-full">
           <AuthProvider>{children}</AuthProvider>
         </main>
       </body>

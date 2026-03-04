@@ -21,7 +21,7 @@ export default function ProfileOptions() {
 
   return (
     <div className="flex flex-col py-2 gap-2 items-center">
-      {sessionStatus == "authenticated" && provider == "credential" && (
+      {sessionStatus == "authenticated" && provider == "credentials" && (
         <>
           <BoxCambiarContraseña
             idBox={0}
@@ -35,7 +35,6 @@ export default function ProfileOptions() {
           />
         </>
       )}
-      <p></p>
     </div>
   );
 }

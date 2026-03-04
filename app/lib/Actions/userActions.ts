@@ -7,6 +7,7 @@ import { findUserBd } from "../repositories/findUserBd"
 import encriptarPassword from "@/utils/encriptarPassword"
 import updatePassword from "../repositories/updatePassword"
 import compararHashes from "@/utils/compararHashes"
+import serviceCambioPasswordCodigo from "../services/sendEmail/serviceCambioPasswordCodigo"
 
 
 // registrar sesion --------------------------
@@ -193,3 +194,24 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
     }
 }
 
+export type reestablecerContraseñaResult = reestablecerContraseñaState | null;
+
+export interface reestablecerContraseñaState {
+    state: boolean,
+    message: string
+}
+
+export async function ActionReestablecerContraseña(prevState: reestablecerContraseñaResult, formData: FormData): Promise<reestablecerContraseñaResult> {
+    const email = formData.get("email") as string;
+    if (!email) {
+        return {
+            state: false,
+            message: "Email es requerido"
+        }
+    }
+    const { state, message } = await serviceCambioPasswordCodigo({ email })
+    return {
+        state,
+        message
+    }
+}

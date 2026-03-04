@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Field from "./Field";
+import Field from "../Field/Field";
 import ButtonAuth from "./ButtonAuth";
 import { registrarSesion, retorno } from "@/app/lib/Actions/userActions";
 import { useActionState } from "react";
@@ -61,7 +61,7 @@ export default function Signup() {
             <hr />
             <Link
               className="px-2 bg-base text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
-              href={"/auth"}
+              href={"/auth/signin"}
             >
               Iniciar sesion
             </Link>

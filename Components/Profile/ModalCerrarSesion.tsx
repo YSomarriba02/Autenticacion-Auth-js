@@ -35,7 +35,7 @@ export default function ModalCerrarSesion({ cerrarModal: close }: props) {
   }, []);
 
   function cerrarSesion() {
-    signOut({ redirectTo: "/auth" });
+    signOut({ redirectTo: "/auth/signin" });
   }
 
   function cerrarModal(e: React.MouseEvent) {

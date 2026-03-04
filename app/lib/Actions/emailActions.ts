@@ -21,9 +21,10 @@ export async function enviarCodigoAction(prevState: enviarCodigoActionType, form
     }
 
     const session = await auth()
-    const { email } = session?.user!
+    const user = session?.user
+    const email = user?.email
 
-    if (!email) {
+    if (!email || !user) {
         return {
             message: "autenticate primero", state: false
         }
@@ -37,6 +38,7 @@ export async function enviarCodigoAction(prevState: enviarCodigoActionType, form
     }
 
 }
+
 
 export async function enviarEmailCodigoAction() {
     console.log("ejecutando server action")

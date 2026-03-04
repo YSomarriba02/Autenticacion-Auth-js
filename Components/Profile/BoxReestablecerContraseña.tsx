@@ -3,7 +3,7 @@
 import React, { SetStateAction, useEffect, useState } from "react";
 import BoxComponent from "./BoxComponent";
 import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
-import FormReestablecerPassword from "./FormReestablecerPassword";
+import FormOtp from "./FormOtp";
 
 interface props {
   idAcordeon: number | null;
@@ -16,16 +16,19 @@ export default function BoxReestablecerContraseña({
   idBox,
   setIdAcordeon,
 }: props) {
-  const [state, setState] = useState(true); //estado para mostrar el boton de recibir codigo
-  const [codigoState, setCodigoState] = useState<boolean | string>(false);
+  const [showForm, setShowForm] = useState(false); //estado para mostrar el boton de recibir codigo
+  const [codigoState, setCodigoState] = useState<null | {
+    state: boolean;
+    message: string;
+  }>(null);
 
   useEffect(() => {
-    if (!state) {
+    if (!showForm) {
       setTimeout(() => {
-        setCodigoState(false);
+        setCodigoState(null);
       }, 6000);
     }
-  }, [state]);
+  }, [showForm]);
 
   return (
     <BoxComponent
@@ -35,12 +38,12 @@ export default function BoxReestablecerContraseña({
       setIdAcordeon={setIdAcordeon}
       title="Reestablecer contraseña"
     >
-      <div className={`${state ? "block" : "hidden"} flex flex-col px-4`}>
+      <div className={`${showForm ? "hidden" : "block"} flex flex-col px-4`}>
         <button
           onClick={async () => {
-            setState(false);
-            const resp = await enviarEmailCodigoAction();
-            setCodigoState(resp);
+            setShowForm(true);
+            const { message, state } = await enviarEmailCodigoAction();
+            setCodigoState({ state, message });
           }}
           className="bg-blue-400 w-2/5 p-1.5 self-end font-semibold rounded-md text-sm"
         >
@@ -48,8 +51,8 @@ export default function BoxReestablecerContraseña({
         </button>
       </div>
       <div className="flex flex-col items-center gap-2">
-        {codigoState && <span className="text-sm">{codigoState}</span>}
-        {state || <FormReestablecerPassword show={state} />}
+        {codigoState && <span className="text-sm">{codigoState.message}</span>}
+        {showForm && <FormOtp show={showForm} />}
       </div>
     </BoxComponent>
   );
