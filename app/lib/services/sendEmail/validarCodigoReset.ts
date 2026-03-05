@@ -92,7 +92,7 @@ export default async function validarCodigoReset({ email, codigo }: { email: str
         }
 
         return {
-            state: true, message: "contraseña reestablecida"
+            state: true, message: "Codigo correcto"
         }
 
 

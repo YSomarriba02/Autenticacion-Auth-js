@@ -3,27 +3,48 @@
 import React, {
   createContext,
   ReactNode,
-  SetStateAction,
   useContext,
+  useRef,
   useState,
 } from "react";
 
 type FormContextType = {
-  showForm: boolean;
-  setShowForm: React.Dispatch<SetStateAction<boolean>>;
-  handleShow: () => void;
+  indice: number;
+  arrPasos: TypePasos[];
+  adelantar: () => void;
+  retroceder: () => void;
 };
+
+type TypePasos = "p1" | "p2" | "p3";
 
 const FormContext = createContext<FormContextType | null>(null);
 
 export function FormProvider({ children }: { children: ReactNode }) {
-  const [show, setShow] = useState<boolean>(true);
-  function handleShow() {
-    setShow((prev) => !prev);
+  const [indice, setIndice] = useState<number>(0);
+  const refArrPasos = useRef<TypePasos[]>(["p1", "p2", "p3"]);
+
+  function adelantar() {
+    if (indice == refArrPasos.current.length - 1) {
+      return;
+    }
+    setIndice((prev) => prev + 1);
   }
+
+  function retroceder() {
+    if (indice == 0) {
+      return;
+    }
+    setIndice((prev) => prev - 1);
+  }
+
   return (
     <FormContext.Provider
-      value={{ showForm: show, setShowForm: setShow, handleShow }}
+      value={{
+        indice,
+        adelantar,
+        retroceder,
+        arrPasos: refArrPasos.current,
+      }}
     >
       {children}
     </FormContext.Provider>
@@ -32,4 +53,23 @@ export function FormProvider({ children }: { children: ReactNode }) {
 
 export function useFormContext() {
   return useContext(FormContext);
+}
+
+type pasos = "p1" | "p2" | "p3";
+
+const arr: pasos[] = ["p1", "p2", "p3"];
+let indice = 0;
+
+function adelantar() {
+  if (indice == arr.length - 1) {
+    return;
+  }
+  indice += 1;
+}
+
+function retroceder() {
+  if (indice == 0) {
+    return;
+  }
+  indice -= 1;
 }

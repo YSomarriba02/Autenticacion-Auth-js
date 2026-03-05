@@ -16,7 +16,7 @@ import { useEmailContext } from "./ProviderEmail";
 
 export default function FormReestablecerPassword() {
   const formContext = useFormContext();
-  const { setShowForm } = formContext!;
+  const { adelantar } = formContext!;
   const emailContext = useEmailContext();
   const { setEmail } = emailContext!;
   const [state, formAction, isPending] = useActionState<
@@ -26,7 +26,7 @@ export default function FormReestablecerPassword() {
 
   useEffect(() => {
     if (state?.state) {
-      setShowForm(false);
+      adelantar();
     }
   }, [state]);
 
