@@ -1,9 +1,10 @@
 import { startTransition, useActionState, useEffect, useRef } from "react";
-import OtpInput from "./OtpInput";
+import OtpInput from "../Profile/OtpInput";
 import {
   ActionValidarCodigoReset,
   enviarCodigoActionType,
 } from "@/app/lib/Actions/emailActions";
+import { useFormContext } from "./Provider";
 
 interface props {
   show: boolean;
@@ -15,7 +16,10 @@ export default function FormOtp({ show, email }: props) {
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
     new Array(5).fill(null),
   );
+
   const formRef = useRef<HTMLFormElement>(null);
+  const formContext = useFormContext();
+  const { adelantar } = formContext!;
 
   function validarCodigoReset(
     prevState: enviarCodigoActionType,
@@ -40,7 +44,11 @@ export default function FormOtp({ show, email }: props) {
   }, [show]);
 
   useEffect(() => {
-    console.log(state.message);
+    let timer: NodeJS.Timeout;
+    if (state.state) {
+      timer = setTimeout(adelantar, 2000);
+    }
+    return () => clearTimeout(timer);
   }, [state]);
 
   function handleKey(indice: number) {
@@ -59,7 +67,6 @@ export default function FormOtp({ show, email }: props) {
       startTransition(() => {
         formAction(new FormData(form));
       });
-      console.log("si se puede enviar");
     }
     inputsRef.current[indice + 1]?.focus();
   }
@@ -77,7 +84,7 @@ export default function FormOtp({ show, email }: props) {
           {state.message}
         </span>
       }
-      <form ref={formRef} action="" className="flex gap-4 justify-center">
+      <form ref={formRef} className="flex gap-4 justify-center">
         {inputsRef.current.map((e, i, arr) => {
           return (
             <OtpInput

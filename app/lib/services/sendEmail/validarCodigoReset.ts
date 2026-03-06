@@ -3,7 +3,7 @@ import validarCodigo from "@/utils/validarCodigo";
 import findPasswordCodigo from "../../repositories/findPasswordCodigo";
 import { findUserBd } from "../../repositories/findUserBd"
 import { cambioPasswCodigo } from "../../types/cambioPasswordCodigo";
-import { user, userBd } from "../../types/user";
+import { userBd } from "../../types/user";
 import updatePasswordCodigoIntento from "../../repositories/updatePasswordCodigoIntento";
 import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
 import generarCodigo from "@/utils/generarCodigo";

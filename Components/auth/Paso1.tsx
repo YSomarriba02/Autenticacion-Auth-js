@@ -1,4 +1,4 @@
-import FormReestablecerPassword from "./FormReestablecerPassword";
+import FormEmail from "./FormEmail";
 
 export default function Paso1() {
   return (
@@ -10,7 +10,7 @@ export default function Paso1() {
         Ingresa la direccion de correo electronico que usas, enviaremos un
         codigo para reestablecer la contraseña
       </p>
-      <FormReestablecerPassword />
+      <FormEmail />
     </section>
   );
 }

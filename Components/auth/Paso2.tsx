@@ -1,14 +1,14 @@
 "use client";
-import FormOtp from "../Profile/FormOtp";
+import FormOtp from "./FormOtp";
 import { useFormContext } from "./Provider";
 import { useEmailContext } from "./ProviderEmail";
 
 export default function Paso2() {
   const provider = useFormContext();
-  const { indice, arrPasos } = provider!;
+  const { value } = provider!;
   const emailContext = useEmailContext();
   const { email } = emailContext!;
-  const show = arrPasos[indice] == "p2";
+  const show = value === "p2";
   return (
     <section className="min-w-full flex flex-col gap-6">
       <h2 className="text-3xl sm-mini:text-lg font-semibold md:text-4xl text-center">

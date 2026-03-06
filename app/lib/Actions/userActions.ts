@@ -8,6 +8,7 @@ import encriptarPassword from "@/utils/encriptarPassword"
 import updatePassword from "../repositories/updatePassword"
 import compararHashes from "@/utils/compararHashes"
 import serviceCambioPasswordCodigo from "../services/sendEmail/serviceCambioPasswordCodigo"
+import serviceReestablecerPassword from "../services/sendEmail/serviceReestablecerPassword"
 
 
 // registrar sesion --------------------------
@@ -201,7 +202,7 @@ export interface reestablecerContraseñaState {
     message: string
 }
 
-export async function ActionReestablecerContraseña(prevState: reestablecerContraseñaResult, formData: FormData): Promise<reestablecerContraseñaResult> {
+export async function ActionCambioPasswordCodigo(prevState: reestablecerContraseñaResult, formData: FormData): Promise<reestablecerContraseñaResult> {
     const email = formData.get("email") as string;
     if (!email) {
         return {
@@ -213,5 +214,26 @@ export async function ActionReestablecerContraseña(prevState: reestablecerContr
     return {
         state,
         message
+    }
+}
+
+export type ActionReestablecerPassword = ReestablecerPasswordState | null
+export type ReestablecerPasswordState = { state: boolean, message: string }
+
+export async function ActionReestablecerPassword(prevState: ActionReestablecerPassword, formData: FormData, email: string): Promise<ReestablecerPasswordState> {
+
+    const password1 = formData.get("password1") as string
+    const password2 = formData.get("password2") as string
+
+    if (!email || !password1 || !password2) {
+        return { message: "Proporcione los campos necesarios", state: false }
+    }
+
+    if (password1 !== password2) {
+        return { message: "Contraseñas no coinciden", state: false }
+    }
+    const { message, state } = await serviceReestablecerPassword({ email, password: password1 })
+    return {
+        message, state
     }
 }

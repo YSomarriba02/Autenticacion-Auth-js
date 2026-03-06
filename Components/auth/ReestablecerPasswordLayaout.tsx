@@ -8,12 +8,12 @@ import { EmailProvider } from "./ProviderEmail";
 
 export default function ReestablecerPasswordLayaout() {
   const context = useFormContext();
-  const { arrPasos, indice, adelantar, retroceder } = context!;
+  const { adelantar, retroceder, value } = context!;
 
   const transalte = (() => {
-    if (arrPasos[indice] == "p1") {
+    if (value == "p1") {
       return "translate-x-0";
-    } else if (arrPasos[indice] == "p2") {
+    } else if (value == "p2") {
       return "-translate-x-[calc(100%+24px)]";
     } else {
       return "-translate-x-[calc(200%+48px)]";
@@ -24,13 +24,15 @@ export default function ReestablecerPasswordLayaout() {
     <EmailProvider>
       <div className="flex flex-col overflow-hidden w-full">
         <section
-          className={`${transalte} w-full flex gap-6 transition-transform duration-700 ease-out`}
+          className={`${transalte} pb-8 w-full flex gap-6 transition-transform duration-700 ease-out`}
         >
           <Paso1 />
           <Paso2 />
           <Paso3 />
         </section>
       </div>
+      <button onClick={adelantar}>Adelantar</button>
+      <button onClick={retroceder}>retroceder</button>
     </EmailProvider>
   );
 }

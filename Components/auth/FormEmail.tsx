@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  ActionReestablecerContraseña,
+  ActionCambioPasswordCodigo,
   reestablecerContraseñaResult,
 } from "@/app/lib/Actions/userActions";
 import { useRouter } from "next/navigation";
@@ -14,7 +14,7 @@ import React, {
 import { useFormContext } from "./Provider";
 import { useEmailContext } from "./ProviderEmail";
 
-export default function FormReestablecerPassword() {
+export default function FormEmail() {
   const formContext = useFormContext();
   const { adelantar } = formContext!;
   const emailContext = useEmailContext();
@@ -22,12 +22,14 @@ export default function FormReestablecerPassword() {
   const [state, formAction, isPending] = useActionState<
     reestablecerContraseñaResult,
     FormData
-  >(ActionReestablecerContraseña, null);
+  >(ActionCambioPasswordCodigo, null);
 
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (state?.state) {
-      adelantar();
+      timer = setTimeout(adelantar, 2000);
     }
+    return () => clearTimeout(timer);
   }, [state]);
 
   const [inputState, setInputState] = useState("");
@@ -53,7 +55,11 @@ export default function FormReestablecerPassword() {
       }}
       className="mt-6 sm-mini:mt-6 flex flex-col items-center gap-4 md:gap-6"
     >
-      {state && <span className="text-red-500">{state.message}</span>}
+      {state && (
+        <span className={`${state.state ? "text-green-400" : "text-red-400"}`}>
+          {state.message}
+        </span>
+      )}
       <input
         value={inputState}
         onChange={handleChange}

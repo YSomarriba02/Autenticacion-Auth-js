@@ -39,7 +39,7 @@ export async function ActionValidarCodigoReset(prevState: enviarCodigoActionType
 
     if (cantidadDigitos < 5) {
         return {
-            state: false, message: ""
+            state: false, message: "OTP debe poseer 5 digitos"
         }
     }
 
