@@ -33,7 +33,7 @@ export default function OtpInput({
         }
         handleBackSpace(indice);
       }}
-      className="sm-mini:size-6 size-10 bg-(--text) text-background text-center rounded-sm focus:outline-4  focus:outline-blue-400"
+      className="sm-mini:size-6 size-10 bg-slate-100 text-black text-center rounded-sm focus:outline-4  focus:outline-blue-400"
     ></input>
   );
 }

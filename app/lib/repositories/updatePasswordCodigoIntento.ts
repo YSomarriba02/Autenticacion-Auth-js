@@ -6,8 +6,6 @@ type updatePasswordCodigotype = {
 }
 
 export default async function updatePasswordCodigoIntento({ id, intentos }: updatePasswordCodigotype) {
-    const resp = await querySQL2("update cambiosPasswCodigo set intentos = @intentos where id_usuario = @id", [{ name: "id", type: "number", value: id }, { name: "intentos", type: "number", value: intentos }])
-
-    return null
+    const resp = await querySQL2("update cambiosPasswCodigo set intentos = @intentos output inserted.id_usuario where id_usuario = @id", [{ name: "id", type: "number", value: id }, { name: "intentos", type: "number", value: intentos }])
     return resp[0] || null
 }

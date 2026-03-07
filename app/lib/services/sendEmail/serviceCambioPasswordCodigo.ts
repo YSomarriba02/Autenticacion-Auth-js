@@ -4,7 +4,7 @@ import insertCambiosPasswordCodigo from "../../repositories/insertCambiosPasswor
 import findPasswordCodigo from "../../repositories/findPasswordCodigo";
 import isFechaExpirada from "@/utils/isFechaExpirada";
 import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
-import envioEmailCodigoOtp from "@/utils/enviarEmailCodigoOtp";
+import enviarEmailCodigoOtp from "@/utils/enviarEmailCodigoOtp";
 import { OTPTIEMPOVALIDO, PENALIZACIONTIEMPO } from "../../constants/password-reset";
 import { reestablecerContraseñaState } from "../../Actions/userActions";
 import CodigoError from "../../Errors/CodigoError";
@@ -44,7 +44,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
                 const nuevoCodigo = generarCodigo()
                 const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
                 if (!update) throw new CodigoError("Error, no se pudo completar esta operacion")
-                await envioEmailCodigoOtp({ codigo: nuevoCodigo, email, type: "reenvio" })
+                await enviarEmailCodigoOtp({ codigo: nuevoCodigo, email, type: "reenvio" })
                 return {
                     state: true, message: "Se le proporciono un nuevo cod, revise su correo"
                 }
@@ -54,7 +54,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
                 const nuevoCodigo = generarCodigo()
                 const update = await updatePasswordCodigo({ id: findCodigo.id_usuario, nuevoCodigo })
                 if (!update) throw new CodigoError("Error, no se pudo completar esta operacion")
-                await envioEmailCodigoOtp({ codigo: nuevoCodigo, email, type: "reenvio" })
+                await enviarEmailCodigoOtp({ codigo: nuevoCodigo, email, type: "reenvio" })
                 return {
                     state: true, message: "Nuevo cod enviado, revise su correo"
                 }
@@ -66,7 +66,7 @@ export default async function serviceCambioPasswordCodigo({ email }: { email: st
         const codigo = generarCodigo()
         const insertCod = await insertCambiosPasswordCodigo({ id, codigo })
         if (!insertCod) throw new CodigoError("Error, no se pudo completar esta operacion")
-        await envioEmailCodigoOtp({ codigo, email, type: "envio" })
+        await enviarEmailCodigoOtp({ codigo, email, type: "envio" })
         return {
             state: true, message: "Enviamos un codigo a tu correo, copialo y pegalo aqui"
         }

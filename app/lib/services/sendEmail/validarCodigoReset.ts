@@ -7,8 +7,7 @@ import { userBd } from "../../types/user";
 import updatePasswordCodigoIntento from "../../repositories/updatePasswordCodigoIntento";
 import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
 import generarCodigo from "@/utils/generarCodigo";
-import templateFunction from "../../email-templates/templateFunction";
-import { enviarEmail } from "./enviarEmail";
+import enviarEmailCodigoOtp from "@/utils/enviarEmailCodigoOtp";
 
 
 type typeRetorno = {
@@ -58,7 +57,8 @@ export default async function validarCodigoReset({ email, codigo }: { email: str
 
         //Si el otp ingresado no es valido se aumenta la cant intentos
         if (mensajeInvalido == "codigoIncorrecto") {
-            updatePasswordCodigoIntento({ id: id_usuario, intentos: intentos + 1 })
+            const update = await updatePasswordCodigoIntento({ id: id_usuario, intentos: intentos + 1 })
+            if (!update) throw new CodigoError("No pudimos actualizar tu codigo, intentalo de nuevo")
             return {
                 state: false, message: objMensajesInvalidos[mensajeInvalido]
             }
@@ -72,25 +72,18 @@ export default async function validarCodigoReset({ email, codigo }: { email: str
         }
 
         //si ya hay 3 intentos, se envia un cod nuevo y se actualiza en la bd
-        if (mensajeInvalido == "intentosExcedidos") {
-            const nuevoCodigo = generarCodigo()
-            await updatePasswordCodigo({ id: id_usuario, nuevoCodigo })
-            const text = "Reenvio de Codigo para cambiar tu password, copie este codigo"
-            const template = templateFunction({ contenido: nuevoCodigo, text, titulo: "Reestablecer Password" })
-            const subject = "codigo cambio password"
-            enviarEmail({ htmlContent: template, subject, toEmail: email })
-            return {
-                state: false, message: objMensajesInvalidos[mensajeInvalido]
-            }
-        }
-
         //si el codigo simplemente expiro se envia uno nuevo
-        if (mensajeInvalido == "codigoExpirado") {
+        if (mensajeInvalido == "intentosExcedidos" || mensajeInvalido == "codigoExpirado") {
+            const nuevoCodigo = generarCodigo()
+            const update = await updatePasswordCodigo({ id: id_usuario, nuevoCodigo })
+            const envio = await enviarEmailCodigoOtp({ email, codigo: nuevoCodigo, type: "reenvio" })
+
+            if (!envio || !update) throw new CodigoError("Tuvimos problemas para actualizar tu codigo, intentalo de nuevo")
+
             return {
                 state: false, message: objMensajesInvalidos[mensajeInvalido]
             }
         }
-
         return {
             state: true, message: "Codigo correcto"
         }

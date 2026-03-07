@@ -23,7 +23,7 @@ export default function Signup() {
 
   return (
     <div className="h-screen">
-      <div className="p-4 flex flex-col absolute left-0 right-0 m-auto w-5/6 bg-base [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
+      <div className="p-4 flex flex-col absolute left-0 right-0 m-auto w-5/6 bg-(--background_2) [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
         <p className="text-4xl">Sign Up</p>
         {state && (
           <span
@@ -40,6 +40,7 @@ export default function Signup() {
             required={true}
             text="email"
             typeInput="email"
+            labelBackground="bg-(--background_2)"
           />
           <Field
             max={30}
@@ -48,6 +49,7 @@ export default function Signup() {
             required={true}
             text="contraseña"
             typeInput={"password"}
+            labelBackground="bg-(--background_2)"
           />
           <Field
             max={30}
@@ -56,11 +58,12 @@ export default function Signup() {
             required={true}
             text="repetir contraseña"
             typeInput={"password"}
+            labelBackground="bg-(--background_2)"
           />
           <div className="relative ">
             <hr />
             <Link
-              className="px-2 bg-base text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
+              className="px-2 bg-(--background_2) text-blue-900 font-semibold absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
               href={"/auth/signin"}
             >
               Iniciar sesion

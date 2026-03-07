@@ -27,7 +27,7 @@ export default function Login() {
 
   return (
     <div className="h-screen">
-      <div className="p-4 flex flex-col absolute left-0 bg-base right-0 m-auto w-5/6 [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6 ">
+      <div className="p-4 flex flex-col absolute left-0 bg-(--background_2) right-0 m-auto w-5/6 [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6 ">
         <p className="text-4xl">Login</p>
         {error && <span className="text-red-500">{error}</span>}
         <form
@@ -60,6 +60,7 @@ export default function Login() {
             required={true}
             text="email"
             typeInput="email"
+            labelBackground="bg-(--background_2)"
           />
           <Field
             max={30}
@@ -68,21 +69,19 @@ export default function Login() {
             required={true}
             text="contraseña"
             typeInput={"password"}
+            labelBackground="bg-(--background_2)"
           />
-          {/* <div className="relative ">
-            <hr />
+          <div className="flex justify-between gap-4 px-4 m-0">
             <Link
-              className="px-2 bg-base text-blue-400 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
+              className="text-indigo-500 dark:text-blue-900 font-semibold md:text-lg"
               href={"/auth/signup"}
             >
               registrarse
             </Link>
-          </div> */}
-          <div className="flex justify-between gap-4 px-4 m-0">
-            <Link className="text-blue-400 md:text-lg" href={"/auth/signup"}>
-              registrarse
-            </Link>
-            <Link href={"/auth/signin/reestablecerpassword"}>
+            <Link
+              href={"/auth/signin/reestablecerpassword"}
+              className="text-sm md:text-sm font-semibold"
+            >
               Olvido la contraseña
             </Link>
           </div>

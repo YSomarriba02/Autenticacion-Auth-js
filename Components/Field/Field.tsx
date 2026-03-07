@@ -11,6 +11,8 @@ interface props {
   required?: boolean;
   typeInput?: "text" | "password" | "email";
   text: string;
+
+  labelBackground?: string;
 }
 
 function handler(element: HTMLDivElement) {}
@@ -22,6 +24,7 @@ export default function Field({
   required,
   text,
   typeInput = "text",
+  labelBackground,
 }: props) {
   const [state, setState] = useState("");
   return (
@@ -34,7 +37,12 @@ export default function Field({
         setState={setState}
         type={typeInput}
       />
-      <Label htmlFor={name} text={text} state={state} />
+      <Label
+        htmlFor={name}
+        text={text}
+        state={state}
+        labelBackground={labelBackground}
+      />
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default function FormNuevaPassword() {
   return (
     <>
       <span
-        className={`${stateForm?.state ? "text-green-400" : "text-red-300"} text-sm text-start `}
+        className={`${stateForm?.state ? "text-indigo-700" : "text-red-600"} text-sm text-start `}
       >
         {stateForm?.message}
       </span>
@@ -59,7 +59,7 @@ export default function FormNuevaPassword() {
             formAction(formData);
           });
         }}
-        className="p-6 pb-4 rounded-2xl flex flex-col gap-5 w-full bg-(--color-base) [box-shadow:1px_2px_8px_0px_black]"
+        className="p-6 pb-4 rounded-2xl flex flex-col gap-5 w-full bg-(--background_2) [box-shadow:1px_2px_8px_0px_black] lg:w-3/4"
       >
         <Field
           max={30}
@@ -68,6 +68,7 @@ export default function FormNuevaPassword() {
           required={true}
           text="contraseña"
           typeInput={"password"}
+          labelBackground="bg-(--background_2)"
         />
         <Field
           max={30}
@@ -76,11 +77,12 @@ export default function FormNuevaPassword() {
           required={true}
           text="repetir contraseña"
           typeInput={"password"}
+          labelBackground="bg-(--background_2)"
         />
         <button
           disabled={isPending}
           type="submit"
-          className="bg-(--text) text-(--color-base) p-2 font-bold rounded-sm"
+          className="bg-(--text) text-(--color-base) p-2 font-bold rounded-sm hover:brightness-125  hover:scale-95 transition-[filter,scale]  duration-150 ease-initial"
         >
           Enviar
         </button>

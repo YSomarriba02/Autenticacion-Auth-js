@@ -56,7 +56,7 @@ export default function FormEmail() {
       className="mt-6 sm-mini:mt-6 flex flex-col items-center gap-4 md:gap-6"
     >
       {state && (
-        <span className={`${state.state ? "text-green-400" : "text-red-400"}`}>
+        <span className={`${state.state ? "text-indigo-700" : "text-red-600"}`}>
           {state.message}
         </span>
       )}
@@ -65,13 +65,13 @@ export default function FormEmail() {
         onChange={handleChange}
         type="email"
         name="email"
-        className="focus:outline-blue-500 outline-zinc-100 outline-2 px-6 w-4/5 rounded-md h-14 sm-mini:h-8 md:h-16 lg:h-14"
+        className="bg-(--background_2) focus:outline-blue-700 outline-zinc-100 outline-2 px-6 w-4/5 rounded-md h-14 sm-mini:h-8 md:h-16 lg:h-14"
       />
       <nav className="flex w-4/5 gap-2">
         <button
           disabled={isPending}
           type="submit"
-          className="px-4 py-3 bg-(--text) text-background font-semibold flex-1 rounded-sm hover:brightness-125 transition-[filter] duration-100 ease-linear sm-mini:py-2 md:py-4 disabled:saturate-50"
+          className="px-4 py-3 bg-(--text) text-base font-semibold flex-1 rounded-sm hover:brightness-125 transition-[filter] duration-100 ease-linear sm-mini:py-2 md:py-4 disabled:saturate-50"
         >
           Enviar
         </button>
