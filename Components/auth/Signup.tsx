@@ -4,7 +4,7 @@ import Link from "next/link";
 import Field from "../Field/Field";
 import ButtonAuth from "./ButtonAuth";
 import { registrarSesion, retorno } from "@/app/lib/Actions/userActions";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
@@ -17,10 +17,9 @@ export default function Signup() {
     null,
   );
 
-  if (status == "authenticated") {
-    return router.replace("/");
-  }
-
+  useEffect(() => {
+    if (status == "authenticated") router.replace("/profile");
+  }, [status]);
   return (
     <div className="h-screen">
       <div className="p-4 flex flex-col absolute left-0 right-0 m-auto w-5/6 bg-(--background_2) [box-shadow:1px_2px_6px_1px_var(--text)] rounded-2xl sm:w-3/5 top-[15vh] md:pt-8 lg:w-2/6">
