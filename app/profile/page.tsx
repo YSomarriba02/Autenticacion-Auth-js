@@ -15,8 +15,10 @@ export default async function page() {
     );
   }
   const email = user.email as string;
-  const image = user.image as string;
+  const image = (user.image as string) || "/icons/profile_no_image.png";
   const name = user.name;
+  console.log("La imagen es");
+  console.log(image);
   return (
     <div className="h-full min-h-screen flex flex-col gap-2 md:px-16">
       <div
@@ -29,7 +31,7 @@ export default async function page() {
           alt={email}
           height={100}
           width={100}
-          className="size-3/4 rounded-lg md:w-80 md:h-80 lg:h-60 lg:w-60"
+          className="size-3/4 rounded-lg md:w-80 md:h-80 lg:h-60 lg:w-60 bg-amber-50"
         />
         <div className="mt-10">
           <span className="text-4xl md:text-3xl">Hola ✋🏻</span>

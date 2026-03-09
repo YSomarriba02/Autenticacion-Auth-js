@@ -7,11 +7,11 @@ type navLink = { href: string; text: string; icon?: string };
 export default async function NavBar() {
   const session = await auth();
   const user = session?.user;
-  const image = user?.image || "";
+  const image = user?.image || "/icons/profile_no_image.png";
 
   const linkDinamico: navLink = {
     href: session ? "/profile" : "/auth/signin",
-    text: session ? "yo" : "Iniciar",
+    text: session ? "Mi perfil" : "Iniciar",
     icon: image,
   };
 
@@ -30,7 +30,7 @@ export default async function NavBar() {
                     height={100}
                     width={100}
                     loading="eager"
-                    className="size-12 border-green-400 border-2 rounded-full"
+                    className="size-12 border-green-400 border-2 rounded-full bg-amber-50"
                   ></Image>
                 ) : (
                   text
