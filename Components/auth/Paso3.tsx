@@ -10,7 +10,7 @@ export default function Paso3() {
         <p className="text-center sm-mini:text-sm md:text-lg">
           Completa los campos para recuperar tu cuenta.{" "}
         </p>
-        <FormNuevaPassword />
+        <FormNuevaPassword typeForm="no-auth" />
       </section>
     </section>
   );

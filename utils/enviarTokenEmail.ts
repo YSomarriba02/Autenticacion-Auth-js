@@ -29,7 +29,7 @@ const objType = {
     } as typeEmail,
     nuevo: {
         subject: "Token validacion",
-        text: "Si todo está correcto, recibirás un enlace en tu correo en unos momentos. Revisa tu bandeja",
+        text: "Usa este enlace para validar tu email en nuestra app",
         titulo: "Registro email"
     } as typeEmail
 }

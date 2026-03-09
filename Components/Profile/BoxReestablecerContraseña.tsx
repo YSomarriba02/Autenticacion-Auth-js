@@ -4,6 +4,7 @@ import React, { SetStateAction, useEffect, useState } from "react";
 import BoxComponent from "./BoxComponent";
 import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
 import FormOtp from "./FormOtp";
+import WizarReestablecerPassword from "./WizardReestablecerPassword";
 
 interface props {
   idAcordeon: number | null;
@@ -23,7 +24,7 @@ export default function BoxReestablecerContraseña({
   }>(null);
 
   useEffect(() => {
-    if (!showForm) {
+    if (showForm) {
       setTimeout(() => {
         setCodigoState(null);
       }, 6000);
@@ -52,7 +53,7 @@ export default function BoxReestablecerContraseña({
       </div>
       <div className="flex flex-col items-center gap-2">
         {codigoState && <span className="text-sm">{codigoState.message}</span>}
-        {showForm && <FormOtp show={showForm} />}
+        {showForm && <WizarReestablecerPassword />}
       </div>
     </BoxComponent>
   );

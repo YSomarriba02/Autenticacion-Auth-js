@@ -9,7 +9,11 @@ import { ActionReestablecerPassword } from "@/app/lib/Actions/userActions";
 import { useEmailContext } from "./ProviderEmail";
 import { signIn } from "next-auth/react";
 
-export default function FormNuevaPassword() {
+interface props {
+  typeForm: "no-auth" | "auth";
+}
+
+export default function FormNuevaPassword({ typeForm }: props) {
   const emailContext = useEmailContext();
   const email = emailContext?.email as string;
   const formRef = useRef<HTMLFormElement>(null);
@@ -28,7 +32,7 @@ export default function FormNuevaPassword() {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (stateForm?.state) {
+    if (stateForm?.state && typeForm == "no-auth") {
       timer = setTimeout(() => {
         const form = new FormData(formRef.current as HTMLFormElement);
         const password = form.get("password1");
@@ -43,12 +47,14 @@ export default function FormNuevaPassword() {
   }, [stateForm]);
 
   return (
-    <>
-      <span
-        className={`${stateForm?.state ? "text-indigo-700" : "text-red-600"} text-sm text-start `}
-      >
-        {stateForm?.message}
-      </span>
+    <div className="min-w-full flex flex-col items-center gap-2">
+      {stateForm && (
+        <span
+          className={`${stateForm?.state ? "text-indigo-500 dark:text-sky-300" : "text-red-600"} text-sm text-start `}
+        >
+          {stateForm?.message}
+        </span>
+      )}
       <form
         ref={formRef}
         onSubmit={(e: React.FormEvent) => {
@@ -69,6 +75,7 @@ export default function FormNuevaPassword() {
           text="contraseña"
           typeInput={"password"}
           labelBackground="bg-(--background_2)"
+          autoFoc={true}
         />
         <Field
           max={30}
@@ -84,9 +91,9 @@ export default function FormNuevaPassword() {
           type="submit"
           className="bg-(--text) text-(--color-base) p-2 font-bold rounded-sm hover:brightness-125  hover:scale-95 transition-[filter,scale]  duration-150 ease-initial"
         >
-          Enviar
+          Cambiar
         </button>
       </form>
-    </>
+    </div>
   );
 }

@@ -13,6 +13,8 @@ interface props {
   text: string;
 
   labelBackground?: string;
+
+  autoFoc?: true;
 }
 
 function handler(element: HTMLDivElement) {}
@@ -25,6 +27,8 @@ export default function Field({
   text,
   typeInput = "text",
   labelBackground,
+
+  autoFoc,
 }: props) {
   const [state, setState] = useState("");
   return (
@@ -36,6 +40,7 @@ export default function Field({
         required={required}
         setState={setState}
         type={typeInput}
+        autoFoc={autoFoc}
       />
       <Label
         htmlFor={name}

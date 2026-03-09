@@ -28,7 +28,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return {
           id: String(user.id),
           email: user.email,
-          image: "https://avatars.githubusercontent.com/u/128437648?v=4", //imagen default por mientras
+          image:
+            "https://media.istockphoto.com/id/1495088043/es/vector/icono-de-perfil-de-usuario-avatar-o-icono-de-persona-foto-de-perfil-s%C3%ADmbolo-de-retrato.jpg?s=1024x1024&w=is&k=20&c=ILoT12BEqzZyr8BxYLwUsaz9-y9Xcb-hl4n2xPLRKAs=", //imagen default por mientras
           name: user.email.split("@")[0],
         };
       },

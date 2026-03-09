@@ -8,6 +8,8 @@ interface props {
   placeholder?: string;
   type?: "password" | "text" | "email";
   setState: Dispatch<SetStateAction<string>>;
+
+  autoFoc?: true;
 }
 
 export default function Input({
@@ -18,6 +20,7 @@ export default function Input({
   placeholder,
   type = "text",
   setState,
+  autoFoc,
 }: props) {
   return (
     <input
@@ -32,6 +35,7 @@ export default function Input({
         const input = e.target as HTMLInputElement;
         setState(input.value);
       }}
+      autoFocus={autoFoc}
     ></input>
   );
 }

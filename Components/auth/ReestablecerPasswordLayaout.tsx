@@ -10,7 +10,7 @@ export default function ReestablecerPasswordLayaout() {
   const context = useFormContext();
   const { adelantar, retroceder, value } = context!;
 
-  const transalte = (() => {
+  const translate = (() => {
     if (value == "p1") {
       return "translate-x-0";
     } else if (value == "p2") {
@@ -22,17 +22,15 @@ export default function ReestablecerPasswordLayaout() {
 
   return (
     <EmailProvider>
-      <div className="flex flex-col overflow-hidden w-full">
+      <div className="flex flex-col w-full overflow-x-clip">
         <section
-          className={`${transalte} pb-8 w-full flex gap-6 transition-transform duration-700 ease-out`}
+          className={`${translate} pb-8 w-full flex gap-6 transition-transform duration-700 ease-out`}
         >
           <Paso1 />
           <Paso2 />
           <Paso3 />
         </section>
       </div>
-      <button onClick={adelantar}>Adelantar</button>
-      <button onClick={retroceder}>retroceder</button>
     </EmailProvider>
   );
 }

@@ -23,5 +23,7 @@ export function EmailProvider({ children }: { children: ReactNode }) {
 }
 
 export function useEmailContext() {
-  return useContext(EmailContext);
+  const ctx = useContext(EmailContext);
+  if (!ctx) throw new Error("Debe proporcionar el EmailProvider");
+  return ctx;
 }

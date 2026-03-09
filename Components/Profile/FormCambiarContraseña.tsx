@@ -48,6 +48,8 @@ export default function FormCambiarContraseña() {
           text="contraseña actual"
           required={true}
           typeInput="password"
+          autoFoc={true}
+          labelBackground="bg-base"
         />
         <Field
           max={20}
@@ -56,6 +58,7 @@ export default function FormCambiarContraseña() {
           text="contraseña nueva"
           required={true}
           typeInput="password"
+          labelBackground="bg-base"
         />
         <button
           disabled={isPending}

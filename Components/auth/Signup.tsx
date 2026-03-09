@@ -27,7 +27,7 @@ export default function Signup() {
         <p className="text-4xl">Sign Up</p>
         {state && (
           <span
-            className={`${state.state ? "text-green-400" : "text-red-500"}`}
+            className={`${state.state ? "text-green-400" : "text-red-500"} text-[12px] mt-2`}
           >
             {state.message}
           </span>
@@ -63,7 +63,7 @@ export default function Signup() {
           <div className="relative ">
             <hr />
             <Link
-              className="px-2 bg-(--background_2) text-blue-900 font-semibold absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg"
+              className="px-2 bg-(--background_2) text-indigo-500 font-semibold absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 md:text-lg dark:text-sky-300 hover:saturate-200 trasition-[filter] duration-100 ease-in"
               href={"/auth/signin"}
             >
               Iniciar sesion

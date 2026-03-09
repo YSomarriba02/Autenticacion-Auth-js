@@ -27,10 +27,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[image:var(--background_gradiente)] dark:bg-[image:none] dark:bg-(--background_1) text-(--text)  transition-colors duration-300 ease-out`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[image:var(--background_gradiente)] bg-fixed dark:bg-[image:none] dark:bg-(--background_1) text-(--text)  transition-colors duration-300 ease-out`}
       >
         <NavBar />
-        <main className="p-10 h-full">
+        <main className="p-10 py-18 h-full">
           <AuthProvider>{children}</AuthProvider>
         </main>
       </body>

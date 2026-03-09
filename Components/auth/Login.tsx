@@ -73,7 +73,7 @@ export default function Login() {
           />
           <div className="flex justify-between gap-4 px-4 m-0">
             <Link
-              className="text-indigo-500 dark:text-blue-900 font-semibold md:text-lg"
+              className="text-indigo-500 dark:text-sky-300 font-semibold md:text-lg hover:saturate-200 trasition-[filter] duration-100 ease-in"
               href={"/auth/signup"}
             >
               registrarse

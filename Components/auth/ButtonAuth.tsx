@@ -18,7 +18,7 @@ export default function ButtonAuth({ provider, redirect, typeAuth }: props) {
       className="flex items-center gap-4 justify-center bg-slate-200 w-full h-10 text-black md:h-14"
     >
       <img src={`/Icons/${provider}Icon.png`} alt="" className="size-6" />
-      <p className="font-medium">{`${text} ${provider}`}</p>
+      <p>{`${text} ${provider}`}</p>
     </button>
   );
 }

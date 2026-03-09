@@ -1,4 +1,10 @@
-import { startTransition, useActionState, useEffect, useRef } from "react";
+import React, {
+  SetStateAction,
+  startTransition,
+  useActionState,
+  useEffect,
+  useRef,
+} from "react";
 import OtpInput from "./OtpInput";
 import {
   ActionValidarCodigoReset,
@@ -8,10 +14,12 @@ import {
 interface props {
   show: boolean;
   email?: string;
+
+  setPaso2: () => void;
 }
 
 // si se le pasa true, se muestra y se monta el focus
-export default function FormOtp({ show, email }: props) {
+export default function FormOtp({ show, email, setPaso2 }: props) {
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
     new Array(5).fill(null),
   );
@@ -40,7 +48,13 @@ export default function FormOtp({ show, email }: props) {
   }, [show]);
 
   useEffect(() => {
-    console.log(state.message);
+    let timer: NodeJS.Timeout;
+    if (state.state) {
+      timer = setTimeout(() => {
+        setPaso2();
+      }, 1000);
+    }
+    return () => clearTimeout(timer);
   }, [state]);
 
   function handleKey(indice: number) {
@@ -69,7 +83,7 @@ export default function FormOtp({ show, email }: props) {
     inputsRef.current[indice - 1]?.focus();
   }
   return (
-    <>
+    <section className="min-w-full flex flex-col gap-6 items-center">
       {
         <span
           className={`${state.state ? "text-green-400" : "text-red-300"} text-sm text-start `}
@@ -94,6 +108,6 @@ export default function FormOtp({ show, email }: props) {
           );
         })}
       </form>
-    </>
+    </section>
   );
 }

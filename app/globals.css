@@ -10,7 +10,7 @@ html {
   :root {
     interpolate-size: allow-keywords;
 
-    --background_gradiente: linear-gradient(to right bottom, #4b7586 70%, #34e69f 100%);
+    --background_gradiente: linear-gradient(to right bottom, #535353 0%, #4b7586 30%, #34e69f 100%);
     --background_1: rgb(255, 255, 255);
     --background_2: #ebebeb;
     --text: #000000;
