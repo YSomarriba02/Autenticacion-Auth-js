@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
     })
 
 
-    const response = NextResponse.redirect("http://localhost:3000/perfil")
+    const response = NextResponse.redirect(new URL("/perfil", req.url))
     response.cookies.set({ name: "authjs.session-token", value: tokenJwt, httpOnly: true, sameSite: "lax", path: "/", secure: false })
 
     return response
