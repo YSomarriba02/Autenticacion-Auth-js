@@ -18,7 +18,9 @@ export default function Signup() {
   );
 
   useEffect(() => {
-    if (status == "authenticated") router.replace("/perfil");
+    if (status == "authenticated") {
+      router.replace("/perfil");
+    }
   }, [status]);
   return (
     <div className="h-screen">
