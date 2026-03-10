@@ -3,7 +3,6 @@
 import React, { SetStateAction, useEffect, useState } from "react";
 import BoxComponent from "./BoxComponent";
 import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
-import FormOtp from "./FormOtp";
 import WizarReestablecerPassword from "./WizardReestablecerPassword";
 
 interface props {

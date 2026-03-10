@@ -167,3 +167,265 @@ next-auth
    └─ validarSeguridadPassword.ts
 
 ```
+```
+next-auth
+├─ app
+│  ├─ api
+│  │  ├─ auth
+│  │  │  └─ [...nextauth]
+│  │  └─ validaremail
+│  │     └─ route.ts
+│  ├─ auth
+│  │  ├─ signin
+│  │  │  ├─ page.tsx
+│  │  │  └─ reestablecer
+│  │  │     └─ page.tsx
+│  │  └─ signup
+│  │     └─ page.tsx
+│  ├─ AuthProvider.tsx
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ lib
+│  │  ├─ Actions
+│  │  │  ├─ emailActions.ts
+│  │  │  └─ userActions.ts
+│  │  ├─ bd.ts
+│  │  ├─ constants
+│  │  │  └─ password-reset.ts
+│  │  ├─ email-templates
+│  │  │  └─ templateFunction.ts
+│  │  ├─ Errors
+│  │  │  └─ CodigoError.ts
+│  │  ├─ repositories
+│  │  │  ├─ findPasswordCodigo.ts
+│  │  │  ├─ findTokenVerificacionEmail.ts
+│  │  │  ├─ findUserBd.ts
+│  │  │  ├─ insertCambiosPasswordCodigo.ts
+│  │  │  ├─ insertTokenVerificacionEmail.ts
+│  │  │  ├─ insertUserBd.ts
+│  │  │  ├─ updatePassword.ts
+│  │  │  ├─ updatePasswordCodigo.ts
+│  │  │  ├─ updatePasswordCodigoIntento.ts
+│  │  │  ├─ updateTokenVerificacionEmail.ts
+│  │  │  └─ updateUserBd.ts
+│  │  ├─ services
+│  │  │  ├─ auth
+│  │  │  │  ├─ loginUser.ts
+│  │  │  │  ├─ signUp.ts
+│  │  │  │  └─ signUpWithProvider.ts
+│  │  │  └─ sendEmail
+│  │  │     ├─ enviarEmail.ts
+│  │  │     ├─ serviceCambioPasswordCodigo.ts
+│  │  │     ├─ serviceReestablecerPassword.ts
+│  │  │     └─ validarCodigoReset.ts
+│  │  └─ types
+│  │     ├─ cambioPasswordCodigo.ts
+│  │     ├─ next-auth.t.d.ts
+│  │     ├─ TokenVerificacionEmail.ts
+│  │     └─ user.ts
+│  ├─ page.tsx
+│  └─ perfil
+│     └─ page.tsx
+├─ auth.tsx
+├─ components
+│  ├─ auth
+│  │  ├─ ButtonAuth.tsx
+│  │  ├─ FormEmail.tsx
+│  │  ├─ FormNuevaPassword.tsx
+│  │  ├─ FormOtp.tsx
+│  │  ├─ Login.tsx
+│  │  ├─ Paso1.tsx
+│  │  ├─ Paso2.tsx
+│  │  ├─ Paso3.tsx
+│  │  ├─ Provider.tsx
+│  │  ├─ ProviderEmail.tsx
+│  │  ├─ ReestablecerPasswordLayaout.tsx
+│  │  └─ Signup.tsx
+│  ├─ Field
+│  │  ├─ Field.tsx
+│  │  ├─ Input.tsx
+│  │  └─ Label.tsx
+│  ├─ LoadingText.tsx
+│  ├─ NavBar.tsx
+│  ├─ Profile
+│  │  ├─ BoxCambiarContrasena.tsx
+│  │  ├─ BoxComponent.tsx
+│  │  ├─ BoxReestablecerContrasena.tsx
+│  │  ├─ ButtonSingOut.tsx
+│  │  ├─ FormCambiarContrasena.tsx
+│  │  ├─ FormOtp.tsx
+│  │  ├─ Modal.tsx
+│  │  ├─ ModalCerrarSesion.tsx
+│  │  ├─ NuevaPassword.tsx
+│  │  ├─ OtpInput.tsx
+│  │  ├─ ProfileOptions.tsx
+│  │  └─ WizardReestablecerPassword.tsx
+│  └─ Spinner.tsx
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ advertencia-icon.png
+│  │  ├─ arrow-left.png
+│  │  ├─ googleIcon.png
+│  │  ├─ logout-icon.png
+│  │  ├─ password-icon.png
+│  │  ├─ profile_no_image.png
+│  │  ├─ reestablecerPassword-icon.png
+│  │  └─ user-icon.png
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ tsconfig.json
+└─ utils
+   ├─ compararHashes.ts
+   ├─ compararPassword.ts
+   ├─ encriptarPassword.ts
+   ├─ enviarEmailCodigoOtp.ts
+   ├─ enviarTokenEmail.ts
+   ├─ generarCodigo.ts
+   ├─ generarLinkToken.ts
+   ├─ generarToken.ts
+   ├─ isFechaExpirada.ts
+   ├─ validarCodigo.ts
+   └─ validarSeguridadPassword.ts
+
+```
+```
+next-auth
+├─ app
+│  ├─ api
+│  │  ├─ auth
+│  │  │  └─ [...nextauth]
+│  │  └─ validaremail
+│  │     └─ route.ts
+│  ├─ auth
+│  │  ├─ signin
+│  │  │  ├─ page.tsx
+│  │  │  └─ reestablecer
+│  │  │     └─ page.tsx
+│  │  └─ signup
+│  │     └─ page.tsx
+│  ├─ AuthProvider.tsx
+│  ├─ favicon.ico
+│  ├─ globals.css
+│  ├─ layout.tsx
+│  ├─ lib
+│  │  ├─ Actions
+│  │  │  ├─ emailActions.ts
+│  │  │  └─ userActions.ts
+│  │  ├─ bd.ts
+│  │  ├─ constants
+│  │  │  └─ password-reset.ts
+│  │  ├─ email-templates
+│  │  │  └─ templateFunction.ts
+│  │  ├─ Errors
+│  │  │  └─ CodigoError.ts
+│  │  ├─ repositories
+│  │  │  ├─ findPasswordCodigo.ts
+│  │  │  ├─ findTokenVerificacionEmail.ts
+│  │  │  ├─ findUserBd.ts
+│  │  │  ├─ insertCambiosPasswordCodigo.ts
+│  │  │  ├─ insertTokenVerificacionEmail.ts
+│  │  │  ├─ insertUserBd.ts
+│  │  │  ├─ updatePassword.ts
+│  │  │  ├─ updatePasswordCodigo.ts
+│  │  │  ├─ updatePasswordCodigoIntento.ts
+│  │  │  ├─ updateTokenVerificacionEmail.ts
+│  │  │  └─ updateUserBd.ts
+│  │  ├─ services
+│  │  │  ├─ auth
+│  │  │  │  ├─ loginUser.ts
+│  │  │  │  ├─ signUp.ts
+│  │  │  │  └─ signUpWithProvider.ts
+│  │  │  └─ sendEmail
+│  │  │     ├─ enviarEmail.ts
+│  │  │     ├─ serviceCambioPasswordCodigo.ts
+│  │  │     ├─ serviceReestablecerPassword.ts
+│  │  │     └─ validarCodigoReset.ts
+│  │  └─ types
+│  │     ├─ cambioPasswordCodigo.ts
+│  │     ├─ next-auth.t.d.ts
+│  │     ├─ TokenVerificacionEmail.ts
+│  │     └─ user.ts
+│  ├─ page.tsx
+│  └─ perfil
+│     └─ page.tsx
+├─ auth.tsx
+├─ components
+│  ├─ auth
+│  │  ├─ ButtonAuth.tsx
+│  │  ├─ FormEmail.tsx
+│  │  ├─ FormNuevaPassword.tsx
+│  │  ├─ FormOtp.tsx
+│  │  ├─ Login.tsx
+│  │  ├─ Paso1.tsx
+│  │  ├─ Paso2.tsx
+│  │  ├─ Paso3.tsx
+│  │  ├─ Provider.tsx
+│  │  ├─ ProviderEmail.tsx
+│  │  ├─ ReestablecerPasswordLayaout.tsx
+│  │  └─ Signup.tsx
+│  ├─ Field
+│  │  ├─ Field.tsx
+│  │  ├─ Input.tsx
+│  │  └─ Label.tsx
+│  ├─ LoadingText.tsx
+│  ├─ NavBar.tsx
+│  ├─ Profile
+│  │  ├─ BoxCambiarContrasena.tsx
+│  │  ├─ BoxComponent.tsx
+│  │  ├─ BoxReestablecerContrasena.tsx
+│  │  ├─ ButtonSingOut.tsx
+│  │  ├─ FormCambiarContrasena.tsx
+│  │  ├─ FormOtp.tsx
+│  │  ├─ Modal.tsx
+│  │  ├─ ModalCerrarSesion.tsx
+│  │  ├─ NuevaPassword.tsx
+│  │  ├─ OtpInput.tsx
+│  │  ├─ ProfileOptions.tsx
+│  │  └─ WizardReestablecerPassword.tsx
+│  └─ Spinner.tsx
+├─ eslint.config.mjs
+├─ next.config.ts
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.mjs
+├─ public
+│  ├─ file.svg
+│  ├─ globe.svg
+│  ├─ icons
+│  │  ├─ advertencia-icon.png
+│  │  ├─ arrow-left.png
+│  │  ├─ googleIcon.png
+│  │  ├─ logout-icon.png
+│  │  ├─ password-icon.png
+│  │  ├─ profile_no_image.png
+│  │  ├─ reestablecerPassword-icon.png
+│  │  └─ user-icon.png
+│  ├─ next.svg
+│  ├─ vercel.svg
+│  └─ window.svg
+├─ README.md
+├─ tsconfig.json
+└─ utils
+   ├─ compararHashes.ts
+   ├─ compararPassword.ts
+   ├─ encriptarPassword.ts
+   ├─ enviarEmailCodigoOtp.ts
+   ├─ enviarTokenEmail.ts
+   ├─ generarCodigo.ts
+   ├─ generarLinkToken.ts
+   ├─ generarToken.ts
+   ├─ isFechaExpirada.ts
+   ├─ validarCodigo.ts
+   └─ validarSeguridadPassword.ts
+
+```
