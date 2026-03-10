@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface props {
   isPending: boolean;
@@ -7,8 +7,6 @@ interface props {
 }
 
 export default function LoadingText({ isPending, loadingText, text }: props) {
-  const refSpan = useRef<HTMLSpanElement | null>(null);
-  const reftext = useRef<HTMLParagraphElement | null>(null);
   const [showLoader, setShowLoader] = useState(false);
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -17,7 +15,9 @@ export default function LoadingText({ isPending, loadingText, text }: props) {
     } else {
       timer = setTimeout(() => setShowLoader(false), 1000);
     }
-    return () => clearTimeout(timer);
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, [isPending]);
 
   return (

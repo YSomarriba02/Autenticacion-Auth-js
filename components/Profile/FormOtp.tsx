@@ -1,10 +1,4 @@
-import React, {
-  SetStateAction,
-  startTransition,
-  useActionState,
-  useEffect,
-  useRef,
-} from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
 import OtpInput from "./OtpInput";
 import {
   ActionValidarCodigoReset,
@@ -20,8 +14,9 @@ interface props {
 
 // si se le pasa true, se muestra y se monta el focus
 export default function FormOtp({ show, email, setPaso2 }: props) {
+  const OTPS = 5;
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
-    new Array(5).fill(null),
+    Array.from({ length: OTPS }, () => null),
   );
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -32,10 +27,10 @@ export default function FormOtp({ show, email, setPaso2 }: props) {
     return ActionValidarCodigoReset(prevState, formData, email);
   }
 
-  const [state, formAction, isPending] = useActionState<
-    enviarCodigoActionType,
-    FormData
-  >(validarCodigoReset, { message: "", state: false });
+  const [state, formAction] = useActionState<enviarCodigoActionType, FormData>(
+    validarCodigoReset,
+    { message: "", state: false },
+  );
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -92,7 +87,7 @@ export default function FormOtp({ show, email, setPaso2 }: props) {
         </span>
       }
       <form ref={formRef} action="" className="flex gap-4 justify-center">
-        {inputsRef.current.map((e, i, arr) => {
+        {Array.from({ length: OTPS }).map((e, i, arr) => {
           return (
             <OtpInput
               key={i}

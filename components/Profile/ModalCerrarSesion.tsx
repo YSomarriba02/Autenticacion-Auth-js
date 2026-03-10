@@ -38,7 +38,7 @@ export default function ModalCerrarSesion({ cerrarModal: close }: props) {
     signOut({ redirectTo: "/auth/signin" });
   }
 
-  function cerrarModal(e: React.MouseEvent) {
+  function cerrarModal() {
     if (!refModal.current) return;
     const modal = refModal.current;
     modal.classList.remove("animate-entradaModal");

@@ -16,11 +16,7 @@ interface props {
   labelBackground?: string;
 
   autoFoc?: true;
-  isValueShow?: boolean;
 }
-
-function handler(element: HTMLDivElement) {}
-
 export default function Field({
   max,
   min,
@@ -31,7 +27,6 @@ export default function Field({
   labelBackground,
 
   autoFoc,
-  isValueShow,
 }: props) {
   const [state, setState] = useState("");
 

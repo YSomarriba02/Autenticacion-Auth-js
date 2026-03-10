@@ -5,7 +5,7 @@ import { user } from "../../types/user"
 
 export async function loginUser(email: string, password: string) {
     if (!email || !password) return false
-    let resp = await findUserBd(email)
+    const resp = await findUserBd(email)
     if (!resp) return false
     const user = resp as user
     const { passw: hash, ...userDTO } = user

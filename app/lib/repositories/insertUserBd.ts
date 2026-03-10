@@ -29,8 +29,8 @@ export default async function insertUserBd({ email, password, provider, isVerifi
     //en Bd por defecto es false, por eso cuando se usan proveedores,
     //se debe enviar esta propiedad en true en los parametros
     if (isVerificado) {
-        columns.push("isVerificado"),
-            values.push("@isVerificado")
+        columns.push("isVerificado")
+        values.push("@isVerificado")
         params.push({ name: "isVerificado", type: "boolean", value: isVerificado })
     }
     const query = `insert into usuarios(${columns.join(",")}) output inserted.id, inserted.email values(${values.join(",")})`

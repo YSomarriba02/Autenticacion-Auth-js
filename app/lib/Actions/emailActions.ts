@@ -51,9 +51,13 @@ export async function ActionValidarCodigoReset(prevState: enviarCodigoActionType
 
 
 export async function enviarEmailCodigoAction() {
-    console.log("ejecutando server action")
     const session = await auth()
-    const email = session?.user?.email!
+    const email = session?.user?.email ?? null
+    if (!email) {
+        return {
+            message: "No esta autenticado", state: false
+        }
+    }
 
     const resp = await serviceCambioPasswordCodigo({ email })
     return resp

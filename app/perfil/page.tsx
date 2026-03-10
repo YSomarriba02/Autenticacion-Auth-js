@@ -10,9 +10,9 @@ export const metadata: Metadata = {
 
 export default async function page() {
   const sesion = await auth();
-  const user = sesion?.user!;
+  const user = sesion?.user;
 
-  if (!sesion) {
+  if (!sesion || !user) {
     return (
       <div className="h-screen">
         No autenticado, no puedes acceder al perfil

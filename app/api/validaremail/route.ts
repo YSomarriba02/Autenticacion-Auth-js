@@ -19,6 +19,9 @@ export async function GET(req: NextRequest) {
     const token = params.get("token") as string
 
     const tokenBd = await findTokenVerificacionEmail({ id_usuario: id })
+    if (tokenBd?.token != token) {
+        return NextResponse.json({ message: "Token no valido" })
+    }
 
     if (!tokenBd) {
         return NextResponse.json({ message: "Token no valido" })
@@ -31,7 +34,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ message: "Token expiro o no es valido" })
     }
 
-    const updateToken = await updateTokenVerificacionEmail({ id_usuario, isValid: false })
+    await updateTokenVerificacionEmail({ id_usuario, isValid: false })
     const updateUser = await updateUserBd({ id: id_usuario, isVerificado: true }) as userBd
 
     const tokenJwt = await encode({

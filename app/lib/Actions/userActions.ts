@@ -52,6 +52,7 @@ export async function registrarSesion(prevState: retorno, formData: FormData): P
         return { state: true, message: registro }
 
     } catch (error) {
+        console.log(error);
         return {
             state: false, message: "Ocurrio un error"
         }

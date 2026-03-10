@@ -13,8 +13,9 @@ interface props {
 
 // si se le pasa true, se muestra y se monta el focus
 export default function FormOtp({ show, email }: props) {
+  const OTPS = 5;
   const inputsRef = useRef<(HTMLInputElement | null)[]>(
-    new Array(5).fill(null),
+    new Array(OTPS).fill(null),
   );
 
   const formRef = useRef<HTMLFormElement>(null);
@@ -28,10 +29,10 @@ export default function FormOtp({ show, email }: props) {
     return ActionValidarCodigoReset(prevState, formData, email);
   }
 
-  const [state, formAction, isPending] = useActionState<
-    enviarCodigoActionType,
-    FormData
-  >(validarCodigoReset, { message: "", state: false });
+  const [state, formAction] = useActionState<enviarCodigoActionType, FormData>(
+    validarCodigoReset,
+    { message: "", state: false },
+  );
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -85,7 +86,7 @@ export default function FormOtp({ show, email }: props) {
         </span>
       }
       <form ref={formRef} className="flex gap-4 justify-center">
-        {inputsRef.current.map((e, i, arr) => {
+        {Array.from({ length: OTPS }).map((e, i, arr) => {
           return (
             <OtpInput
               key={i}

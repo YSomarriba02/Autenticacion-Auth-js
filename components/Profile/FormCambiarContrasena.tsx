@@ -23,7 +23,7 @@ export default function FormCambiarContrasena() {
   return (
     <div
       className="px-4"
-      onClick={(e: any) => {
+      onClick={(e: React.MouseEvent) => {
         e.stopPropagation();
       }}
     >

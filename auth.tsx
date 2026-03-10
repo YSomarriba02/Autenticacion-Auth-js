@@ -38,7 +38,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.SECRET,
 
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account }) {
       if (user) {
         const email = user.email as string;
         const usuarioBd = await findUserBd(email);

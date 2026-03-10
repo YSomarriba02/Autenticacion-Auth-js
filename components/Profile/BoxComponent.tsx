@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, SetStateAction, useEffect, useState } from "react";
+import React, { ReactNode, SetStateAction } from "react";
 
 interface props {
   idBox: number;

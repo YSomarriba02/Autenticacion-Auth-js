@@ -11,7 +11,7 @@ export default function ProfileOptions() {
   const session = useSession();
   const data = session.data;
   const sessionStatus = session.status;
-  const provider = data?.user.provider!;
+  const provider = data?.user.provider;
 
   console.log(provider);
 
