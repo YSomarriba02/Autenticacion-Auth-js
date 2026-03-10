@@ -1,14 +1,14 @@
-import React, { FormEvent, startTransition, useActionState } from "react";
+import React, { startTransition, useActionState } from "react";
 import Field from "../Field/Field";
 import {
   ActionCambiarContraseña,
-  CambiarContraseñaResult,
+  CambiarContrasenaResult,
 } from "@/app/lib/Actions/userActions";
 import LoadingText from "../LoadingText";
 
-export default function FormCambiarContraseña() {
+export default function FormCambiarContrasena() {
   const [state, formAction, isPending] = useActionState<
-    CambiarContraseñaResult,
+    CambiarContrasenaResult,
     FormData
   >(ActionCambiarContraseña, null);
 

@@ -1,5 +1,5 @@
-import ReestablecerPasswordLayaout from "@/Components/auth/ReestablecerPasswordLayaout";
-import { FormProvider } from "@/Components/auth/Provider";
+import ReestablecerPasswordLayaout from "@/components/auth/ReestablecerPasswordLayaout";
+import { FormProvider } from "@/components/auth/Provider";
 
 export default function page() {
   return (

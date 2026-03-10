@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
-import Modal from "@/Components/Profile/Modal";
-import ProfileOptions from "@/Components/Profile/ProfileOptions";
+import Modal from "@/components/Profile/Modal";
+import ProfileOptions from "@/components/Profile/ProfileOptions";
 import { Metadata } from "next";
 import Image from "next/image";
 

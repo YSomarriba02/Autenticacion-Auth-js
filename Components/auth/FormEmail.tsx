@@ -2,7 +2,7 @@
 
 import {
   ActionCambioPasswordCodigo,
-  reestablecerContraseñaResult,
+  reestablecerContrasenaResult,
 } from "@/app/lib/Actions/userActions";
 import { useRouter } from "next/navigation";
 import React, {
@@ -20,7 +20,7 @@ export default function FormEmail() {
   const emailContext = useEmailContext();
   const { setEmail } = emailContext!;
   const [state, formAction, isPending] = useActionState<
-    reestablecerContraseñaResult,
+    reestablecerContrasenaResult,
     FormData
   >(ActionCambioPasswordCodigo, null);
 

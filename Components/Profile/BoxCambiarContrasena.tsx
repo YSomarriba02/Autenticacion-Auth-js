@@ -1,7 +1,7 @@
 "use client";
 
 import React, { SetStateAction } from "react";
-import FormCambiarContraseña from "./FormCambiarContraseña";
+import FormCambiarContrasena from "./FormCambiarContrasena";
 import BoxComponent from "./BoxComponent";
 
 interface props {
@@ -10,7 +10,7 @@ interface props {
   setIdAcordeon: React.Dispatch<SetStateAction<number | null>>;
 }
 
-export default function BoxCambiarContraseña({
+export default function BoxCambiarContrasena({
   idBox,
   idAcordeon,
   setIdAcordeon,
@@ -24,7 +24,7 @@ export default function BoxCambiarContraseña({
       setIdAcordeon={setIdAcordeon}
       title="Cambiar contraseña"
     >
-      <FormCambiarContraseña />
+      <FormCambiarContrasena />
     </BoxComponent>
   );
 }

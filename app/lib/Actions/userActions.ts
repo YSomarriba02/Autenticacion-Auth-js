@@ -132,14 +132,14 @@ export async function registrarSesion(prevState: retorno, formData: FormData): P
 
 
 
-export type CambiarContraseñaResult = CambiarContraseñaState | null
+export type CambiarContrasenaResult = CambiarContrasenaState | null
 
-interface CambiarContraseñaState {
+interface CambiarContrasenaState {
     state: boolean,
     message: string,
 }
 
-export async function ActionCambiarContraseña(prevState: CambiarContraseñaResult, formData: FormData): Promise<CambiarContraseñaResult> {
+export async function ActionCambiarContraseña(prevState: CambiarContrasenaResult, formData: FormData): Promise<CambiarContrasenaResult> {
     const passwordActual = formData.get("passwordActual") as string
     const passwordNueva = formData.get("passwordNueva") as string
 
@@ -206,14 +206,14 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
     }
 }
 
-export type reestablecerContraseñaResult = reestablecerContraseñaState | null;
+export type reestablecerContrasenaResult = reestablecerContrasenaState | null;
 
-export interface reestablecerContraseñaState {
+export interface reestablecerContrasenaState {
     state: boolean,
     message: string
 }
 
-export async function ActionCambioPasswordCodigo(prevState: reestablecerContraseñaResult, formData: FormData): Promise<reestablecerContraseñaResult> {
+export async function ActionCambioPasswordCodigo(prevState: reestablecerContrasenaResult, formData: FormData): Promise<reestablecerContrasenaResult> {
     const email = formData.get("email") as string;
     if (!email) {
         return {

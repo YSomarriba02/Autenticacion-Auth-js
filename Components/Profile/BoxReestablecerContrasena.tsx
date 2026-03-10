@@ -12,7 +12,7 @@ interface props {
   setIdAcordeon: React.Dispatch<SetStateAction<number | null>>;
 }
 
-export default function BoxReestablecerContraseña({
+export default function BoxReestablecerContrasena({
   idAcordeon,
   idBox,
   setIdAcordeon,

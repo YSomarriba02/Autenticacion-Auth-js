@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import BoxCambiarContraseña from "./BoxCambiarContraseña";
-import BoxReestablecerContraseña from "./BoxReestablecerContraseña";
+import BoxCambiarContrasena from "./BoxCambiarContraseña";
+import BoxReestablecerContrasena from "./BoxReestablecerContrasena";
 import { useSession } from "next-auth/react";
 import Spinner from "../Spinner";
 
@@ -21,12 +21,12 @@ export default function ProfileOptions() {
         sessionStatus == "authenticated" &&
         provider == "credentials" && (
           <>
-            <BoxCambiarContraseña
+            <BoxCambiarContrasena
               idBox={0}
               idAcordeon={idAcordeon}
               setIdAcordeon={setIdAcordeon}
             />
-            <BoxReestablecerContraseña
+            <BoxReestablecerContrasena
               idBox={1}
               idAcordeon={idAcordeon}
               setIdAcordeon={setIdAcordeon}
