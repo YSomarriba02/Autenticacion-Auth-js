@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import BoxCambiarContrasena from "./BoxCambiarContraseña";
+import BoxCambiarContrasena from "./BoxCambiarContrasena";
 import BoxReestablecerContrasena from "./BoxReestablecerContrasena";
 import { useSession } from "next-auth/react";
 import Spinner from "../Spinner";
