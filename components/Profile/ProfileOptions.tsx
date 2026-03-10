@@ -13,6 +13,8 @@ export default function ProfileOptions() {
   const sessionStatus = session.status;
   const provider = data?.user.provider!;
 
+  console.log(provider);
+
   return (
     <div className="flex flex-col py-2 gap-2 items-center">
       {sessionStatus == "loading" ? (
