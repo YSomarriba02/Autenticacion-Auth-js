@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import Input from "./Input";
 import Label from "./Label";
+import { Eye, EyeOff } from "lucide-react";
 
 interface props {
   name: string;
@@ -15,6 +16,7 @@ interface props {
   labelBackground?: string;
 
   autoFoc?: true;
+  isValueShow?: boolean;
 }
 
 function handler(element: HTMLDivElement) {}
@@ -29,10 +31,16 @@ export default function Field({
   labelBackground,
 
   autoFoc,
+  isValueShow,
 }: props) {
   const [state, setState] = useState("");
+
+  const [show, setShow] = useState<boolean | undefined>(false);
+  function handleShow() {
+    setShow((prev) => !prev);
+  }
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex w-full">
       <Input
         name={name}
         max={max}
@@ -41,7 +49,20 @@ export default function Field({
         setState={setState}
         type={typeInput}
         autoFoc={autoFoc}
+        isValueShow={show}
       />
+      {typeInput == "password" &&
+        (show ? (
+          <Eye
+            className="absolute right-[2%] top-1/2 -translate-y-1/2"
+            onClick={handleShow}
+          />
+        ) : (
+          <EyeOff
+            className="absolute right-[2%] top-1/2 -translate-y-1/2"
+            onClick={handleShow}
+          />
+        ))}
       <Label
         htmlFor={name}
         text={text}

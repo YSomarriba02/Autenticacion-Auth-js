@@ -7,6 +7,7 @@ import updateTokenVerificacionEmail from "../../repositories/updateTokenVerifica
 import generarToken from "@/utils/generarToken"
 import insertTokenVerificacionEmail from "../../repositories/insertTokenVerificacionEmail"
 import enviarTokenEmail from "@/utils/enviarTokenEmail"
+import validarSeguridadPassword from "@/utils/validarSeguridadPassword"
 
 const TIME_VALIDO = (10 * 10) * 1000
 
@@ -20,6 +21,12 @@ export default async function signUp(email: string, password: string): Promise<s
     try {
         const userRepo = await findUserBd(email);
         if (!userRepo) {
+
+            const validarPassword = validarSeguridadPassword({ password })
+            if (typeof validarPassword == "string") {
+                return validarPassword
+            }
+
             const hash = await encriptarPassword(password);
             const userInsert = await insertUserBd({ email, password: hash })
 
