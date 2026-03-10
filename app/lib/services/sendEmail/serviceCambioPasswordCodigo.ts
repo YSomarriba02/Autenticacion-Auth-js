@@ -6,11 +6,11 @@ import isFechaExpirada from "@/utils/isFechaExpirada";
 import updatePasswordCodigo from "../../repositories/updatePasswordCodigo";
 import enviarEmailCodigoOtp from "@/utils/enviarEmailCodigoOtp";
 import { OTPTIEMPOVALIDO, PENALIZACIONTIEMPO } from "../../constants/password-reset";
-import { reestablecerContraseñaState } from "../../Actions/userActions";
+import { reestablecerContrasenaState } from "../../Actions/userActions";
 import CodigoError from "../../Errors/CodigoError";
 
 
-export default async function serviceCambioPasswordCodigo({ email }: { email: string }): Promise<reestablecerContraseñaState> {
+export default async function serviceCambioPasswordCodigo({ email }: { email: string }): Promise<reestablecerContrasenaState> {
     if (!email) return {
         state: false,
         message: "Email es requerido"

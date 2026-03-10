@@ -1,4 +1,3 @@
-import encriptarPassword from "@/utils/encriptarPassword"
 import insertUserBd from "../../repositories/insertUserBd"
 
 export default async function signUpWithProvider(email: string, provider: string) {
