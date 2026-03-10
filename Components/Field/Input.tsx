@@ -1,5 +1,4 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import { Eye } from "lucide-react";
 
 interface props {
   name: string;
