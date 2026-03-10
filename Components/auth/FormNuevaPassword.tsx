@@ -39,7 +39,7 @@ export default function FormNuevaPassword({ typeForm }: props) {
         signIn("credentials", {
           email,
           password,
-          redirectTo: "/profile",
+          redirectTo: "/perfil",
         });
       }, 1000);
     }

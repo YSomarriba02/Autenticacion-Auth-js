@@ -18,7 +18,7 @@ export default function Signup() {
   );
 
   useEffect(() => {
-    if (status == "authenticated") router.replace("/profile");
+    if (status == "authenticated") router.replace("/perfil");
   }, [status]);
   return (
     <div className="h-screen">
@@ -78,7 +78,7 @@ export default function Signup() {
         </form>
 
         <div className="flex h-full mt-2">
-          <ButtonAuth provider="google" redirect="/profile" typeAuth="signup" />
+          <ButtonAuth provider="google" redirect="/perfil" typeAuth="signup" />
         </div>
       </div>
     </div>

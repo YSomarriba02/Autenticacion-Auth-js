@@ -86,7 +86,7 @@ export default function FormOtp({ show, email, setPaso2 }: props) {
     <section className="min-w-full flex flex-col gap-6 items-center">
       {
         <span
-          className={`${state.state ? "text-green-400" : "text-red-300"} text-sm text-start `}
+          className={`${state.state ? "text-indigo-500 dark:text-sky-300" : "text-red-300"} text-sm text-start `}
         >
           {state.message}
         </span>

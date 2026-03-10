@@ -56,7 +56,9 @@ export default function FormEmail() {
       className="mt-6 sm-mini:mt-6 flex flex-col items-center gap-4 md:gap-6"
     >
       {state && (
-        <span className={`${state.state ? "text-indigo-700" : "text-red-600"}`}>
+        <span
+          className={`${state.state ? "text-indigo-500 dark:text-sky-300" : "text-red-600"}`}
+        >
           {state.message}
         </span>
       )}

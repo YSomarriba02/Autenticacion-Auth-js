@@ -28,7 +28,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         return {
           id: String(user.id),
           email: user.email,
-          image: null,
+          image: "/icons/profile_no_image.png",
           name: user.email.split("@")[0],
         };
       },

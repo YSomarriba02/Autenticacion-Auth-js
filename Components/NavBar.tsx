@@ -2,15 +2,15 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import Image from "next/image";
 
-type navLink = { href: string; text: string; icon?: string };
+type navLink = { href: string; text: string; icon?: string | null };
 
 export default async function NavBar() {
   const session = await auth();
   const user = session?.user;
-  const image = user?.image || "/icons/profile_no_image.png";
+  const image = user?.image;
 
   const linkDinamico: navLink = {
-    href: session ? "/profile" : "/auth/signin",
+    href: session ? "/perfil" : "/auth/signin",
     text: session ? "Mi perfil" : "Iniciar",
     icon: image,
   };
@@ -26,7 +26,7 @@ export default async function NavBar() {
                 {icon ? (
                   <Image
                     alt={icon!}
-                    src={icon!}
+                    src={icon}
                     height={100}
                     width={100}
                     loading="eager"

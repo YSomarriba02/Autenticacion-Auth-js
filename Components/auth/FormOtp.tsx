@@ -79,7 +79,7 @@ export default function FormOtp({ show, email }: props) {
     <>
       {
         <span
-          className={`${state.state ? "text-indigo-700" : "text-red-600"} w-full text-center text-sm`}
+          className={`${state.state ? "text-indigo-500 dark:text-sky-300" : "text-red-600"} w-full text-center text-sm`}
         >
           {state.message}
         </span>

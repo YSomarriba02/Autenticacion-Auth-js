@@ -16,7 +16,7 @@ export default function Login() {
 
   useEffect(() => {
     if (status == "authenticated") {
-      router.push("/profile");
+      router.push("/perfil");
       router.refresh();
     }
   }, [status]);
@@ -41,7 +41,7 @@ export default function Login() {
               email: formData.get("email"),
               password: formData.get("password"),
               redirect: false,
-              redirectTo: "/profile",
+              redirectTo: "/perfil",
             });
 
             setPending(false);
@@ -95,7 +95,7 @@ export default function Login() {
         </form>
 
         <div className="flex h-full mt-2">
-          <ButtonAuth provider="google" redirect="/profile" typeAuth="login" />
+          <ButtonAuth provider="google" redirect="/perfil" typeAuth="login" />
         </div>
       </div>
     </div>

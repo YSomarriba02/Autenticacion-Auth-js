@@ -1,7 +1,12 @@
 import { auth } from "@/auth";
 import Modal from "@/Components/Profile/Modal";
 import ProfileOptions from "@/Components/Profile/ProfileOptions";
+import { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "Perfil",
+};
 
 export default async function page() {
   const sesion = await auth();
@@ -15,7 +20,7 @@ export default async function page() {
     );
   }
   const email = user.email as string;
-  const image = (user.image as string) || "/icons/profile_no_image.png";
+  const image = user.image as string;
   const name = user.name;
   console.log("La imagen es");
   console.log(image);

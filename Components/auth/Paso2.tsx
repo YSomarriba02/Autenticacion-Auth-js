@@ -15,8 +15,8 @@ export default function Paso2() {
         Revisa tu correo electronico
       </h2>
       <p className="text-center sm-mini:text-sm md:text-lg">
-        Verifica que eres tu ingresando el codigo de un solo uso que te enviamos
-        a:
+        {`Verifica que eres tu ingresando el codigo de un solo uso que te enviamos
+        a ${email}`}
       </p>
       <FormOtp show={show} email={email} />
     </section>

@@ -9,6 +9,7 @@ import updatePassword from "../repositories/updatePassword"
 import compararHashes from "@/utils/compararHashes"
 import serviceCambioPasswordCodigo from "../services/sendEmail/serviceCambioPasswordCodigo"
 import serviceReestablecerPassword from "../services/sendEmail/serviceReestablecerPassword"
+import validarSeguridadPassword from "@/utils/validarSeguridadPassword"
 
 
 // registrar sesion --------------------------
@@ -166,8 +167,7 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
     }
 
     const user = userBd as userBd
-    console.log(user);
-    if (user.provider_name != "credential") {
+    if (user.provider_name != "credentials") {
         return {
             message: "No disponible para proveedores", state: false
         }
@@ -179,6 +179,17 @@ export async function ActionCambiarContraseña(prevState: CambiarContraseñaResu
         return {
             state: false, message: "Contraseña actual no es valida"
         }
+    }
+
+
+    const isPasswordNuevaIgual = await compararHashes(passwordNueva, user.passw!)
+    if (isPasswordNuevaIgual) {
+        return { message: "Proporcione una contraseña diferente a la actual", state: false }
+    }
+
+    const validarPassword = validarSeguridadPassword({ password: passwordNueva })
+    if (typeof validarPassword == "string") {
+        return { message: validarPassword, state: false }
     }
 
     const hash = await encriptarPassword(passwordNueva);
@@ -232,6 +243,12 @@ export async function ActionReestablecerPassword(prevState: ActionReestablecerPa
     if (password1 !== password2) {
         return { message: "Contraseñas no coinciden", state: false }
     }
+
+    const validarPassword = validarSeguridadPassword({ password: password1 })
+    if (typeof validarPassword == "string") {
+        return { message: validarPassword, state: false }
+    }
+
     const { message, state } = await serviceReestablecerPassword({ email, password: password1 })
     return {
         message, state

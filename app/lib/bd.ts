@@ -13,6 +13,8 @@ const configConexion: config = {
     }
 }
 
+console.log(process.env.Db_user);
+
 let poolConfig: ConnectionPool | null = null
 
 async function getPool() {
