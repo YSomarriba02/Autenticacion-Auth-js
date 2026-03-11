@@ -37,6 +37,7 @@ export default async function page() {
           height={100}
           width={100}
           className="size-3/4 rounded-lg md:w-80 md:h-80 lg:h-60 lg:w-60 bg-amber-50"
+          unoptimized
         />
         <div className="mt-10">
           <span className="text-4xl md:text-3xl">Hola ✋🏻</span>

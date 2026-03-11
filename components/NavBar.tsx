@@ -31,6 +31,7 @@ export default async function NavBar() {
                     width={100}
                     loading="eager"
                     className="size-12 border-green-400 border-2 rounded-full bg-amber-50"
+                    unoptimized
                   ></Image>
                 ) : (
                   text
