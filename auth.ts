@@ -44,7 +44,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const usuarioBd = await findUserBd(email);
         const provider = account?.provider as string;
         if (!usuarioBd) {
-          signUpWithProvider(email, provider);
+          await signUpWithProvider(email, provider);
         }
         token.email = user.email;
         token.picture = user.image;
