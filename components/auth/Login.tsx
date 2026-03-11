@@ -79,7 +79,7 @@ export default function Login() {
               registrarse
             </Link>
             <Link
-              href={"/auth/signin/reestablecerpassword"}
+              href={"/auth/reestablecer"}
               className="text-sm md:text-sm font-semibold"
             >
               Olvido la contraseña
