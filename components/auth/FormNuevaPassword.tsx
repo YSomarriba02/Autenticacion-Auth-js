@@ -5,7 +5,7 @@ import React, {
   useRef,
 } from "react";
 import Field from "../Field/Field";
-import { ActionReestablecerPassword } from "@/app/lib/Actions/userActions";
+import { ActionReestablecerPassword } from "@/lib/Actions/userActions";
 import { useEmailContext } from "./ProviderEmail";
 import { signIn } from "next-auth/react";
 

@@ -3,7 +3,7 @@ import Field from "../Field/Field";
 import {
   ActionCambiarContraseña,
   CambiarContrasenaResult,
-} from "@/app/lib/Actions/userActions";
+} from "@/lib/Actions/userActions";
 import LoadingText from "../LoadingText";
 
 export default function FormCambiarContrasena() {

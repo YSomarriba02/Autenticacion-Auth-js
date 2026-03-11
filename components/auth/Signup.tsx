@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Field from "../Field/Field";
 import ButtonAuth from "./ButtonAuth";
-import { registrarSesion, retorno } from "@/app/lib/Actions/userActions";
+import { registrarSesion, retorno } from "@/lib/Actions/userActions";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";

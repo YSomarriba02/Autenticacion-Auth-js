@@ -1,4 +1,4 @@
-import { typeObjMensajesInvalidos } from "@/app/lib/services/sendEmail/validarCodigoReset"
+import { typeObjMensajesInvalidos } from "@/lib/services/sendEmail/validarCodigoReset"
 
 const PENALIZACION = (5 * 60) * 1000
 const TIEMPOVALIDOCODIGO = (10 * 60) * 1000

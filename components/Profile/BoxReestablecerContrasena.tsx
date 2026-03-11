@@ -2,7 +2,7 @@
 
 import React, { SetStateAction, useEffect, useState } from "react";
 import BoxComponent from "./BoxComponent";
-import { enviarEmailCodigoAction } from "@/app/lib/Actions/emailActions";
+import { enviarEmailCodigoAction } from "@/lib/Actions/emailActions";
 import WizarReestablecerPassword from "./WizardReestablecerPassword";
 
 interface props {

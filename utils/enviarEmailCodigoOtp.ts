@@ -1,6 +1,6 @@
-import { OTPTIEMPOVALIDO } from "@/app/lib/constants/password-reset"
-import templateFunction from "@/app/lib/email-templates/templateFunction"
-import { enviarEmail } from "@/app/lib/services/sendEmail/enviarEmail"
+import { OTPTIEMPOVALIDO } from "@/lib/constants/password-reset"
+import templateFunction from "@/lib/email-templates/templateFunction"
+import { enviarEmail } from "@/lib/services/sendEmail/enviarEmail"
 
 const emailTemplates = {
     envio: {

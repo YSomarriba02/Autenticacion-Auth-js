@@ -3,7 +3,7 @@ import OtpInput from "./OtpInput";
 import {
   ActionValidarCodigoReset,
   enviarCodigoActionType,
-} from "@/app/lib/Actions/emailActions";
+} from "@/lib/Actions/emailActions";
 
 interface props {
   show: boolean;

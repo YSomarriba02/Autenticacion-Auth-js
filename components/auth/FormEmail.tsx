@@ -3,7 +3,7 @@
 import {
   ActionCambioPasswordCodigo,
   reestablecerContrasenaResult,
-} from "@/app/lib/Actions/userActions";
+} from "@/lib/Actions/userActions";
 import { useRouter } from "next/navigation";
 import React, {
   startTransition,

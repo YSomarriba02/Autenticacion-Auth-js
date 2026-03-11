@@ -1,9 +1,9 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-import { loginUser } from "./app/lib/services/auth/loginUser";
-import { findUserBd } from "./app/lib/repositories/findUserBd";
-import signUpWithProvider from "./app/lib/services/auth/signUpWithProvider";
+import { loginUser } from "./lib/services/auth/loginUser";
+import { findUserBd } from "./lib/repositories/findUserBd";
+import signUpWithProvider from "./lib/services/auth/signUpWithProvider";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   providers: [

@@ -3,7 +3,7 @@ import OtpInput from "../Profile/OtpInput";
 import {
   ActionValidarCodigoReset,
   enviarCodigoActionType,
-} from "@/app/lib/Actions/emailActions";
+} from "@/lib/Actions/emailActions";
 import { useFormContext } from "./Provider";
 
 interface props {

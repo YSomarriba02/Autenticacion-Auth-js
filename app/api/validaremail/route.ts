@@ -1,7 +1,7 @@
-import findTokenVerificacionEmail from "@/app/lib/repositories/findTokenVerificacionEmail";
-import updateTokenVerificacionEmail from "@/app/lib/repositories/updateTokenVerificacionEmail";
-import updateUserBd from "@/app/lib/repositories/updateUserBd";
-import { userBd } from "@/app/lib/types/user";
+import findTokenVerificacionEmail from "@/lib/repositories/findTokenVerificacionEmail";
+import updateTokenVerificacionEmail from "@/lib/repositories/updateTokenVerificacionEmail";
+import updateUserBd from "@/lib/repositories/updateUserBd";
+import { userBd } from "@/lib/types/user";
 import isFechaExpirada from "@/utils/isFechaExpirada";
 import { encode } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";

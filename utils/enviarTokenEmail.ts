@@ -1,6 +1,6 @@
-import templateFunction from "@/app/lib/email-templates/templateFunction"
+import templateFunction from "@/lib/email-templates/templateFunction"
 import generarLinkToken from "./generarLinkToken"
-import { enviarEmail } from "@/app/lib/services/sendEmail/enviarEmail"
+import { enviarEmail } from "@/lib/services/sendEmail/enviarEmail"
 
 interface enviarTokenEmail {
     id_usuario: number,
