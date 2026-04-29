@@ -51,7 +51,7 @@ export async function GET(req: NextRequest) {
 
 
     const response = NextResponse.redirect(new URL("https://autenticacion-auth-js.onrender.com/perfil"))
-    response.cookies.set({ name: "authjs.session-token", value: tokenJwt, httpOnly: true, sameSite: "lax", path: "/", secure: true, domain: "autenticacion-auth-js.onrender.com" })
+    response.cookies.set({ name: "authjs.session-token", value: tokenJwt, httpOnly: true, sameSite: "lax", path: "/", secure: true })
 
     return response
 }
