@@ -8,7 +8,6 @@ type validarCodigoType = { codigo: string, codigoCambio: number, fecha_creacion:
 export default function validarCodigo({ fecha_creacion, intentos, codigoCambio, codigo }: validarCodigoType): false | keyof typeObjMensajesInvalidos {
 
     if (intentos >= 3) {
-
         if ((fecha_creacion.getTime() + PENALIZACION) > new Date().getTime()) {
             return "intentosExcedidosIspenalizado"
         }

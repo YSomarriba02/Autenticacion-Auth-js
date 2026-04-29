@@ -24,7 +24,7 @@ const objType = {
 
     renovacion: {
         subject: "Token validacion",
-        text: "Nuevo token para valdiar email",
+        text: "Nuevo token para validar email",
         titulo: "Reenvio de token"
     } as typeEmail,
     nuevo: {
