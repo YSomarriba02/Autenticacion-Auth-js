@@ -12,6 +12,8 @@ export default async function page() {
   const sesion = await auth();
   const user = sesion?.user;
 
+  console.log(sesion)
+
   if (!sesion || !user) {
     return (
       <div className="h-screen">
