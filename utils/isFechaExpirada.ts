@@ -8,8 +8,8 @@ export default function isFechaExpirada({ fecha, aumentoTime = 0 }: { fecha: Dat
     const actual = new Date().getTime()
     const f1 = fechaParseada.getTime() + aumentoTime
 
-
-    console.log(`La fecha: ${f1} - actual: ${actual}`)
+    console.log(`La fecha fechaParseada es ${fechaParseada}`)
+    console.log(`La fecha actual es ${new Date()}`);
 
     if (actual > f1) {
         return true
